@@ -57,7 +57,7 @@ public final class HypertextDocument extends WebDocument {
 		this.images = parsedImages;
 	}
 
-
+	@Override
 	public JSONObject toJSON() {
 		JSONObject object = super.toJSON();
 

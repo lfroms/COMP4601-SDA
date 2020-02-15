@@ -30,6 +30,7 @@ public final class BinaryDocument extends WebDocument {
 			this.inferredContent = object.getString(Fields.INFERRED_CONTENT);
 		}
 
+	@Override
 	public JSONObject toJSON() {
 		JSONObject object = super.toJSON();
 
