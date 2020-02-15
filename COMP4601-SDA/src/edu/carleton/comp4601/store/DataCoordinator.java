@@ -15,7 +15,7 @@ public final class DataCoordinator implements Storable<WebDocument>, Searchable<
 	private static Storable<WebDocument> documentsDatabase = 
 			new MongoProvider<>(MongoMapper::new, getDocumentsDatabaseConfig());
 
-	private static Storable<WebDocument> luceneIndex = 
+	private static SearchableAndStorable<WebDocument> luceneIndex = 
 			new LuceneProvider<>(LuceneMapper::new);
 
 	private static Storable<WebDocument> graph = 
@@ -25,6 +25,7 @@ public final class DataCoordinator implements Storable<WebDocument>, Searchable<
 	public void upsert(WebDocument input) {
 		documentsDatabase.upsert(input);	
 		luceneIndex.upsert(input);
+		graph.upsert(input);
 	}
 
 	@Override
@@ -34,7 +35,11 @@ public final class DataCoordinator implements Storable<WebDocument>, Searchable<
 
 	@Override
 	public List<WebDocument> search(String terms) {
-		// TODO Auto-generated method stub
+		return luceneIndex.search(terms);
+	}
+	
+	public List<WebDocument> searchDistributed(String terms) {
+		// TODO Implement using DS
 		return null;
 	}
 	

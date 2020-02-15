@@ -6,11 +6,10 @@ import java.util.function.Supplier;
 import edu.carleton.comp4601.models.Identifiable;
 import edu.carleton.comp4601.store.DocumentMapper;
 import edu.carleton.comp4601.store.MappableProvider;
-import edu.carleton.comp4601.store.Searchable;
-import edu.carleton.comp4601.store.Storable;
+import edu.carleton.comp4601.store.SearchableAndStorable;
 
 public final class LuceneProvider<DocumentType extends Identifiable> extends MappableProvider<DocumentType>
-		implements Storable<DocumentType>, Searchable<DocumentType> {
+		implements SearchableAndStorable<DocumentType> {
 
 	public LuceneProvider(Supplier<? extends DocumentMapper<DocumentType>> mapperConstructor) {
 		super(mapperConstructor);
