@@ -6,7 +6,7 @@ import edu.uci.ics.crawler4j.url.WebURL;
 
 public final class BinaryDocument extends WebDocument {
 	private String mimeType;
-	private Long sizeInBytes;
+	private Integer sizeInBytes;
 	private String inferredContent;
 
 	public BinaryDocument(
@@ -14,9 +14,12 @@ public final class BinaryDocument extends WebDocument {
 			Integer parentId,
 			WebURL url,
 			Integer lastCrawledTime,
-			Double pageRankScore) {
+			Double pageRankScore,
+			byte[] data) {
 
 		super(id, parentId, url, lastCrawledTime, pageRankScore);
+		
+		this.sizeInBytes = data.length;
 		// TODO: Implement Tika
 	}
 
@@ -26,7 +29,7 @@ public final class BinaryDocument extends WebDocument {
 			super(object);
 			
 			this.mimeType = object.getString(Fields.MIME_TYPE);
-			this.sizeInBytes = object.getLong(Fields.SIZE_IN_BYTES);
+			this.sizeInBytes = object.getInt(Fields.SIZE_IN_BYTES);
 			this.inferredContent = object.getString(Fields.INFERRED_CONTENT);
 		}
 

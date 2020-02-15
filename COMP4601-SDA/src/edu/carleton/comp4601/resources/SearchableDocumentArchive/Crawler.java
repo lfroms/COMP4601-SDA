@@ -65,7 +65,8 @@ final class Crawler extends WebCrawler {
 				webUrl.getParentDocid(),
 				webUrl,
 				getCurrentUnixTimestamp(),
-				0.0
+				0.0,
+				page.getContentData()
 			);
 		
 		dataCoordinator.upsert(vertex);
