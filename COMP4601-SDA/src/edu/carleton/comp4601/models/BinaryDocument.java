@@ -17,7 +17,7 @@ public final class BinaryDocument extends WebDocument {
 			Double pageRankScore) {
 
 		super(id, parentId, url, lastCrawledTime, pageRankScore);
-		// TODO Auto-generated constructor stub
+		// TODO: Implement Tika
 	}
 
 	// JSON SERIALIZATION ===============================================================
