@@ -2,7 +2,7 @@ package edu.carleton.comp4601.models;
 
 import org.json.JSONObject;
 
-class ImageDescriptor {
+final class ImageDescriptor {
 	private String url;
 	private String altText;
 

@@ -9,7 +9,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
-class HypertextDocument extends WebDocument {
+final class HypertextDocument extends WebDocument {
 	private String title;
 	private List<String> links;
 	private List<ImageDescriptor> images;
