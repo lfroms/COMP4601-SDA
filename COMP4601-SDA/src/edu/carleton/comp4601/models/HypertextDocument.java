@@ -24,14 +24,13 @@ public final class HypertextDocument extends WebDocument {
 			WebURL url,
 			Integer lastCrawledTime,
 			Double pageRankScore,
-			String title,
 			String htmlParseDataText) {
 
 		super(id, parentId, url, lastCrawledTime, pageRankScore);
 
 		Document doc = Jsoup.parse(htmlParseDataText);
 		
-		this.title = title;
+		this.title = getTitleFromDocument(doc);
 		this.links = getLinksFromDocument(doc);
 		this.images = getImagesFromDocument(doc);
 		this.paragraphs = getParagraphsFromDocument(doc);
@@ -78,6 +77,10 @@ public final class HypertextDocument extends WebDocument {
 	}
 
 	// HTML PARSING HELPERS =============================================================
+	
+	private static String getTitleFromDocument(Document document) {
+		return document.title();
+	}
 
 	private static List<String> getLinksFromDocument(Document document) {
 		Elements linkElements = document.select("a");

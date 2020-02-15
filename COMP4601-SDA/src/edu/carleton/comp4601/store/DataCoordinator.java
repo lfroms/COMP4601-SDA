@@ -12,6 +12,16 @@ import edu.carleton.comp4601.store.mongo.MongoMapper;
 import edu.carleton.comp4601.store.mongo.MongoProvider;
 
 public final class DataCoordinator implements Storable<WebDocument>, Searchable<WebDocument> {
+	private static DataCoordinator singleInstance = null;
+	
+	public static DataCoordinator getInstance() {
+		if (singleInstance == null) {
+			singleInstance = new DataCoordinator();
+		}
+		
+		return singleInstance;
+	}
+	
 	private static Storable<WebDocument> documentsDatabase = 
 			new MongoProvider<>(MongoMapper::new, getDocumentsDatabaseConfig());
 
