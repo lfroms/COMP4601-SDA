@@ -77,6 +77,12 @@ public abstract class WebDocument implements Identifiable, Locatable {
 	
 	public abstract String getTypeName();
 	
+	// SETTERS ==========================================================================
+	
+	public void setPageRankScore(Double score) {
+		this.pageRankScore = score;
+	}
+	
 	// FIELD NAMES ======================================================================
 	
 	private static class Fields {

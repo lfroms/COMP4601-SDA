@@ -32,9 +32,11 @@ public final class DataCoordinator implements Storable<WebDocument>, Searchable<
 
 	@Override
 	public void upsert(WebDocument input) {
-		documentsDatabase.upsert(input);	
-		luceneIndex.upsert(input);
 		graph.upsert(input);
+		luceneIndex.upsert(input);
+		
+		// TODO: Calculate PageRank before adding all nodes to database.
+		documentsDatabase.upsert(input);	
 	}
 
 	@Override
