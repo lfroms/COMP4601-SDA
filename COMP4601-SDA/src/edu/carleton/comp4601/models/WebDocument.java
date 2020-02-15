@@ -5,16 +5,15 @@ import org.json.JSONObject;
 import edu.uci.ics.crawler4j.url.WebURL;
 
 public abstract class WebDocument implements Identifiable, Locatable {
-	private Integer id;
-	private Integer parentId;
-	private static String type;
-	private WebURL url;
+	private final Integer id;
+	private final String typeName;
+	private final WebURL url;
 	private Integer lastCrawledTime;
 	private Double pageRankScore;
 		
-	public WebDocument(Integer id, Integer parentId, WebURL url, Integer lastCrawledTime, Double pageRankScore) {
+	public WebDocument(Integer id, WebURL url, Integer lastCrawledTime, Double pageRankScore) {
 		this.id = id;
-		this.parentId = parentId;
+		this.typeName = getTypeName();
 		this.url = url;
 		this.lastCrawledTime = lastCrawledTime;
 		this.pageRankScore = pageRankScore;
@@ -22,21 +21,17 @@ public abstract class WebDocument implements Identifiable, Locatable {
 	
 	// JSON SERIALIZATION ===============================================================
 	
-	public WebDocument(JSONObject object) {
-		this(
-				object.getInt(Fields.ID),
-				object.getInt(Fields.PARENT_ID),
-				null,
-				object.getInt(Fields.LAST_CRAWLED_TIME),
-				object.getDouble(Fields.PAGE_RANK_SCORE)
-			);
-		
+	public WebDocument(JSONObject object) {		
 		WebURL newUrl = new WebURL();
 		newUrl.setURL(object.getString(Fields.URL));
-		newUrl.setDocid(this.id);
-		newUrl.setParentDocid(this.parentId);
+		newUrl.setDocid(object.getInt(Fields.ID));
+		newUrl.setParentDocid(object.getInt(Fields.PARENT_ID));
 		
+		this.id = object.getInt(Fields.ID);
+		this.typeName = getTypeName();
 		this.url = newUrl;
+		this.lastCrawledTime = object.getInt(Fields.LAST_CRAWLED_TIME);
+		this.pageRankScore = object.getDouble(Fields.PAGE_RANK_SCORE);
 	}
 	
 	public JSONObject toJSON() {
@@ -44,8 +39,8 @@ public abstract class WebDocument implements Identifiable, Locatable {
 		
 		object
 			.put(Fields.ID, id)
-			.put(Fields.PARENT_ID, parentId)
-			.put(TYPE_FIELD, type)
+			.put(Fields.PARENT_ID, getParentId())
+			.put(TYPE_FIELD, typeName)
 			.put(Fields.URL, url)
 			.put(Fields.LAST_CRAWLED_TIME, lastCrawledTime)
 			.put(Fields.PAGE_RANK_SCORE, pageRankScore);
@@ -60,7 +55,7 @@ public abstract class WebDocument implements Identifiable, Locatable {
 	}
 	
 	public Integer getParentId() {
-		return parentId;
+		return url.getParentDocid();
 	}
 
 	public WebURL getURL() {

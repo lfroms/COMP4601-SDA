@@ -43,11 +43,15 @@ final class Crawler extends WebCrawler {
 	
 	private void handleWebDocument(Page page) {
 		HtmlParseData htmlParseData = (HtmlParseData) page.getParseData();
+		
+		if (htmlParseData instanceof HtmlParseData == false) {
+			return;
+		}
+		
 		WebURL webUrl = page.getWebURL();
 
 		WebDocument vertex = new HypertextDocument(
 				webUrl.getDocid(),
-				webUrl.getParentDocid(),
 				webUrl,
 				getCurrentUnixTimestamp(),
 				0.0,
@@ -62,7 +66,6 @@ final class Crawler extends WebCrawler {
 		
 		WebDocument vertex = new BinaryDocument(
 				webUrl.getDocid(),
-				webUrl.getParentDocid(),
 				webUrl,
 				getCurrentUnixTimestamp(),
 				0.0,
@@ -73,9 +76,7 @@ final class Crawler extends WebCrawler {
 	}
 	
 	private Boolean pageIsWebDocument(Page page) {
-		HtmlParseData htmlParseData = (HtmlParseData) page.getParseData();
-
-		return htmlParseData instanceof HtmlParseData;
+		return page.getContentType().contains("html");
 	}
 	
 	private Boolean stringStartsWithSupportedPrefix(String input) {

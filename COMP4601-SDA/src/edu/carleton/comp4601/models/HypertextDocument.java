@@ -20,13 +20,12 @@ public final class HypertextDocument extends WebDocument {
 
 	public HypertextDocument(
 			Integer id,
-			Integer parentId,
 			WebURL url,
 			Integer lastCrawledTime,
 			Double pageRankScore,
 			String htmlParseDataText) {
 
-		super(id, parentId, url, lastCrawledTime, pageRankScore);
+		super(id, url, lastCrawledTime, pageRankScore);
 
 		Document doc = Jsoup.parse(htmlParseDataText);
 		

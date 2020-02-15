@@ -11,13 +11,12 @@ public final class BinaryDocument extends WebDocument {
 
 	public BinaryDocument(
 			Integer id,
-			Integer parentId,
 			WebURL url,
 			Integer lastCrawledTime,
 			Double pageRankScore,
 			byte[] data) {
 
-		super(id, parentId, url, lastCrawledTime, pageRankScore);
+		super(id, url, lastCrawledTime, pageRankScore);
 		
 		this.sizeInBytes = data.length;
 		// TODO: Implement Tika
