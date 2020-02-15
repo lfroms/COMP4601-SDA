@@ -9,6 +9,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
+import edu.uci.ics.crawler4j.url.WebURL;
+
 public final class HypertextDocument extends WebDocument {
 	private String title;
 	private List<String> links;
@@ -18,13 +20,14 @@ public final class HypertextDocument extends WebDocument {
 
 	public HypertextDocument(
 			Integer id,
-			String url,
+			Integer parentId,
+			WebURL url,
 			Integer lastCrawledTime,
 			Double pageRankScore,
 			String title,
 			String htmlParseDataText) {
 
-		super(id, url, id, pageRankScore);
+		super(id, parentId, url, lastCrawledTime, pageRankScore);
 
 		Document doc = Jsoup.parse(htmlParseDataText);
 		

@@ -1,6 +1,7 @@
 package edu.carleton.comp4601.store.mongo;
 
 import java.util.Objects;
+import java.util.Optional;
 import java.util.function.Supplier;
 
 import org.bson.Document;
@@ -43,7 +44,7 @@ public final class MongoProvider<DocumentType extends Identifiable> extends Mapp
 		collection.replaceOne(filter, documentToSave, options);
 	}
 
-	public final DocumentType find(Integer documentId) {
+	public final Optional<DocumentType> find(Integer documentId) {
 		FindIterable<Document> cursor = collection.find(new BasicDBObject(SYSTEM_ID_FIELD, documentId));
 		MongoCursor<Document> c = cursor.iterator();
 
@@ -54,7 +55,7 @@ public final class MongoProvider<DocumentType extends Identifiable> extends Mapp
 		Document document = c.next();
 
 		try {
-			return mapperConstructor.get().deserialize(document);
+			return Optional.of(mapperConstructor.get().deserialize(document));
 
 		} catch (Exception e) {
 			e.printStackTrace();

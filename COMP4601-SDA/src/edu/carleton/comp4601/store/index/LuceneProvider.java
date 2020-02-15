@@ -1,6 +1,7 @@
 package edu.carleton.comp4601.store.index;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Supplier;
 
 import edu.carleton.comp4601.models.Identifiable;
@@ -23,7 +24,7 @@ public final class LuceneProvider<DocumentType extends Identifiable> extends Map
 	}
 
 	@Override
-	public DocumentType find(Integer id) {
+	public Optional<DocumentType> find(Integer id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

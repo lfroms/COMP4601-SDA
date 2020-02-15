@@ -1,5 +1,7 @@
 package edu.carleton.comp4601.store;
 
+import java.util.Optional;
+
 import edu.carleton.comp4601.models.Identifiable;
 
 public interface Storable<DataType extends Identifiable> {
@@ -15,6 +17,6 @@ public interface Storable<DataType extends Identifiable> {
 	 * @param id
 	 * @return The object.
 	 */
-	public DataType find(Integer id);
+	public Optional<DataType> find(Integer id);
 
 }

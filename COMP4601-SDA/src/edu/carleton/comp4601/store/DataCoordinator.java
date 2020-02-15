@@ -1,6 +1,7 @@
 package edu.carleton.comp4601.store;
 
 import java.util.List;
+import java.util.Optional;
 
 import edu.carleton.comp4601.models.WebDocument;
 import edu.carleton.comp4601.store.graph.GraphMapper;
@@ -29,7 +30,7 @@ public final class DataCoordinator implements Storable<WebDocument>, Searchable<
 	}
 
 	@Override
-	public WebDocument find(Integer id) {
+	public Optional<WebDocument> find(Integer id) {
 		return documentsDatabase.find(id);
 	}
 

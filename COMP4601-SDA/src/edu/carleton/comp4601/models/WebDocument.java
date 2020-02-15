@@ -2,15 +2,19 @@ package edu.carleton.comp4601.models;
 
 import org.json.JSONObject;
 
-public abstract class WebDocument implements Identifiable {
+import edu.uci.ics.crawler4j.url.WebURL;
+
+public abstract class WebDocument implements Identifiable, Locatable {
 	private Integer id;
+	private Integer parentId;
 	private static String type;
-	private String url;
+	private WebURL url;
 	private Integer lastCrawledTime;
 	private Double pageRankScore;
 		
-	public WebDocument(Integer id, String url, Integer lastCrawledTime, Double pageRankScore) {
+	public WebDocument(Integer id, Integer parentId, WebURL url, Integer lastCrawledTime, Double pageRankScore) {
 		this.id = id;
+		this.parentId = parentId;
 		this.url = url;
 		this.lastCrawledTime = lastCrawledTime;
 		this.pageRankScore = pageRankScore;
@@ -21,10 +25,18 @@ public abstract class WebDocument implements Identifiable {
 	public WebDocument(JSONObject object) {
 		this(
 				object.getInt(Fields.ID),
-				object.getString(Fields.URL),
+				object.getInt(Fields.PARENT_ID),
+				null,
 				object.getInt(Fields.LAST_CRAWLED_TIME),
 				object.getDouble(Fields.PAGE_RANK_SCORE)
 			);
+		
+		WebURL newUrl = new WebURL();
+		newUrl.setURL(object.getString(Fields.URL));
+		newUrl.setDocid(this.id);
+		newUrl.setParentDocid(this.parentId);
+		
+		this.url = newUrl;
 	}
 	
 	public JSONObject toJSON() {
@@ -32,6 +44,7 @@ public abstract class WebDocument implements Identifiable {
 		
 		object
 			.put(Fields.ID, id)
+			.put(Fields.PARENT_ID, parentId)
 			.put(TYPE_FIELD, type)
 			.put(Fields.URL, url)
 			.put(Fields.LAST_CRAWLED_TIME, lastCrawledTime)
@@ -45,8 +58,12 @@ public abstract class WebDocument implements Identifiable {
 	public Integer getId() {
 		return id;
 	}
+	
+	public Integer getParentId() {
+		return parentId;
+	}
 
-	public String getURL() {
+	public WebURL getURL() {
 		return url;
 	}
 
@@ -64,6 +81,7 @@ public abstract class WebDocument implements Identifiable {
 	
 	private static class Fields {
 		public static final String ID = "id";
+		public static final String PARENT_ID = "parent_id";
 		public static final String URL = "url";
 		public static final String LAST_CRAWLED_TIME = "last_crawled_time";
 		public static final String PAGE_RANK_SCORE = "page_rank_score";
