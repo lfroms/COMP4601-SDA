@@ -2,7 +2,9 @@ package edu.carleton.comp4601.store;
 
 import org.bson.Document;
 
-public interface DocumentMapper<DataType> {
+import edu.carleton.comp4601.models.Identifiable;
+
+public interface DocumentMapper<DataType extends Identifiable> {
 	
 	/**
 	 * 

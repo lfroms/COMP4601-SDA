@@ -1,5 +1,8 @@
 package edu.carleton.comp4601.store.mongo;
 
+import java.util.Objects;
+import java.util.function.Supplier;
+
 import org.bson.Document;
 import org.bson.conversions.Bson;
 
@@ -22,23 +25,23 @@ public final class MongoProvider<DocumentType extends Identifiable> {
 
 	private static final String SYSTEM_ID_FIELD = "_id";
 	
-	private DocumentMapper<DocumentType> mapper;
+	private final Supplier<? extends DocumentMapper<DocumentType>> mapperConstructor;
 
-	public MongoProvider(DocumentMapper<DocumentType> mapper) {
-		this.mapper = mapper;
+	// PUBLIC INTERFACE
+	
+	public MongoProvider(Supplier<? extends DocumentMapper<DocumentType>> mapperConstructor) {
+		this.mapperConstructor = Objects.requireNonNull(mapperConstructor);
 	}
 
-	// MARK: Public interface.
-
-	public final void saveDocument(DocumentType document) {
+	public final void upsertDocument(DocumentType document) {
 		Bson filter = Filters.eq(SYSTEM_ID_FIELD, document.getId());
 		ReplaceOptions options = new ReplaceOptions().upsert(true);
 
-		Document documentToSave = mapper.serialize(document);
+		Document documentToSave = mapperConstructor.get().serialize(document);
 		collection.replaceOne(filter, documentToSave, options);
 	}
 
-	public final DocumentType findDocumentById(Integer documentId) {
+	public final Identifiable getDocument(Integer documentId) {
 		FindIterable<Document> cursor = collection.find(new BasicDBObject(SYSTEM_ID_FIELD, documentId));
 		MongoCursor<Document> c = cursor.iterator();
 
@@ -48,7 +51,7 @@ public final class MongoProvider<DocumentType extends Identifiable> {
 
 		Document document = c.next();
 
-		return mapper.deserialize(document);
+		return mapperConstructor.get().deserialize(document);
 	}
 
 }
