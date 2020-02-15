@@ -3,41 +3,34 @@ package edu.carleton.comp4601.models;
 import org.json.JSONObject;
 
 class ImageDescriptor {
-	String url;
-	String altText;
-	
+	private String url;
+	private String altText;
+
 	public ImageDescriptor(String url, String altText) {
 		this.url = url;
 		this.altText = altText;
 	}
 	
-	// MARK: FIELD NAMES
-	
-	private static class Fields {
-		public static final String IMAGE_URL = "url";
-		public static final String IMAGE_ALT = "alt";
+	// JSON SERIALIZATION ===============================================================
+
+	public ImageDescriptor(JSONObject object) {
+		this(object.getString(Fields.URL), object.getString(Fields.ALT_TEXT));
 	}
-	
-	// JSON SERIALIZATION
-	
+
 	public JSONObject toJSON() {
 		JSONObject object = new JSONObject();
 
 		object
-			.put(Fields.IMAGE_URL, url)
-			.put(Fields.IMAGE_ALT, altText);
+			.put(Fields.URL, url)
+			.put(Fields.ALT_TEXT, altText);
 
 		return object;
 	}
+
+	// FIELD NAMES ======================================================================
 	
-	public static ImageDescriptor fromJSONString(String jsonString) {
-		JSONObject jsonObject = new JSONObject(jsonString);
-		
-		ImageDescriptor descriptor = new ImageDescriptor(
-				jsonObject.get(Fields.IMAGE_URL).toString(),
-				jsonObject.get(Fields.IMAGE_ALT).toString()
-			);
-		
-		return descriptor;
+	private static class Fields {
+		public static final String URL = "url";
+		public static final String ALT_TEXT = "alt";
 	}
 }
