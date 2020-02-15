@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import edu.carleton.comp4601.models.WebDocument;
-import edu.carleton.comp4601.store.graph.GraphMapper;
 import edu.carleton.comp4601.store.graph.GraphProvider;
 import edu.carleton.comp4601.store.index.LuceneMapper;
 import edu.carleton.comp4601.store.index.LuceneProvider;
@@ -19,8 +18,7 @@ public final class DataCoordinator implements Storable<WebDocument>, Searchable<
 	private static SearchableAndStorable<WebDocument> luceneIndex = 
 			new LuceneProvider<>(LuceneMapper::new);
 
-	private static Storable<WebDocument> graph = 
-			new GraphProvider<>(GraphMapper::new);
+	private static Storable<WebDocument> graph = new GraphProvider<>();
 
 	@Override
 	public void upsert(WebDocument input) {

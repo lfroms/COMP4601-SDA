@@ -1,6 +1,5 @@
 package edu.carleton.comp4601.store.mongo;
 
-import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Supplier;
 
@@ -21,14 +20,14 @@ import edu.carleton.comp4601.store.DocumentMapper;
 import edu.carleton.comp4601.store.MappableProvider;
 import edu.carleton.comp4601.store.Storable;
 
-public final class MongoProvider<DocumentType extends Identifiable> extends MappableProvider<DocumentType> implements Storable<DocumentType> {
+public final class MongoProvider<DocumentType extends Identifiable> extends MappableProvider<DocumentType, Document> implements Storable<DocumentType> {
 	private final MongoClient mongoClient;
 	private final MongoDatabase db;
 	private final MongoCollection<Document> collection;
 
 	private static final String SYSTEM_ID_FIELD = "_id";
 	
-	public MongoProvider(Supplier<? extends DocumentMapper<DocumentType>> mapperConstructor, MongoDBConfig config) {
+	public MongoProvider(Supplier<? extends DocumentMapper<DocumentType, Document>> mapperConstructor, MongoDBConfig config) {
 		super(mapperConstructor);
 	
 		this.mongoClient = new MongoClient(config.getHostname(), config.getPort());
