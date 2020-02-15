@@ -2,7 +2,7 @@ package edu.carleton.comp4601.store;
 
 import edu.carleton.comp4601.models.Identifiable;
 
-interface Storable<DataType extends Identifiable> {
+public interface Storable<DataType extends Identifiable> {
 	
 	/**
 	 * 
@@ -16,4 +16,5 @@ interface Storable<DataType extends Identifiable> {
 	 * @return The object.
 	 */
 	public DataType find(Integer id);
+
 }

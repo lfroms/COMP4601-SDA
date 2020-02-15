@@ -17,28 +17,25 @@ import com.mongodb.client.model.ReplaceOptions;
 
 import edu.carleton.comp4601.models.Identifiable;
 import edu.carleton.comp4601.store.DocumentMapper;
+import edu.carleton.comp4601.store.MappableProvider;
+import edu.carleton.comp4601.store.Storable;
 
-public final class MongoProvider<DocumentType extends Identifiable> {
+public final class MongoProvider<DocumentType extends Identifiable> extends MappableProvider<DocumentType> implements Storable<DocumentType> {
 	private final MongoClient mongoClient;
 	private final MongoDatabase db;
 	private final MongoCollection<Document> collection;
 
 	private static final String SYSTEM_ID_FIELD = "_id";
 	
-	private final Supplier<? extends DocumentMapper<DocumentType>> mapperConstructor;
-
-	// PUBLIC INTERFACE
-	
-	public MongoProvider(
-			Supplier<? extends DocumentMapper<DocumentType>> mapperConstructor, MongoDBConfig config) {
+	public MongoProvider(Supplier<? extends DocumentMapper<DocumentType>> mapperConstructor, MongoDBConfig config) {
+		super(mapperConstructor);
 	
 		this.mongoClient = new MongoClient(config.getHostname(), config.getPort());
 		this.db = mongoClient.getDatabase(config.getDatabaseName());
 		this.collection = db.getCollection(config.getCollectionName());
-		this.mapperConstructor = Objects.requireNonNull(mapperConstructor);
 	}
 
-	public final void upsertDocument(DocumentType document) {
+	public final void upsert(DocumentType document) {
 		Bson filter = Filters.eq(SYSTEM_ID_FIELD, document.getId());
 		ReplaceOptions options = new ReplaceOptions().upsert(true);
 
@@ -46,7 +43,7 @@ public final class MongoProvider<DocumentType extends Identifiable> {
 		collection.replaceOne(filter, documentToSave, options);
 	}
 
-	public final Identifiable getDocument(Integer documentId) {
+	public final DocumentType find(Integer documentId) {
 		FindIterable<Document> cursor = collection.find(new BasicDBObject(SYSTEM_ID_FIELD, documentId));
 		MongoCursor<Document> c = cursor.iterator();
 
@@ -64,5 +61,4 @@ public final class MongoProvider<DocumentType extends Identifiable> {
 			return null;
 		}
 	}
-
 }
