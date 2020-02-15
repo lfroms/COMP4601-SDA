@@ -4,10 +4,11 @@ import org.json.JSONObject;
 
 public abstract class WebDocument implements Identifiable {
 	private Integer id;
+	private static String type;
 	private String url;
 	private Integer lastCrawledTime;
 	private Double pageRankScore;
-	
+		
 	public WebDocument(Integer id, String url, Integer lastCrawledTime, Double pageRankScore) {
 		this.id = id;
 		this.url = url;
@@ -18,10 +19,12 @@ public abstract class WebDocument implements Identifiable {
 	// JSON SERIALIZATION ===============================================================
 	
 	public WebDocument(JSONObject object) {
-		this.id = object.getInt(Fields.ID);
-		this.url = object.getString(Fields.URL);
-		this.lastCrawledTime = object.getInt(Fields.LAST_CRAWLED_TIME);
-		this.pageRankScore = object.getDouble(Fields.PAGE_RANK_SCORE);
+		this(
+				object.getInt(Fields.ID),
+				object.getString(Fields.URL),
+				object.getInt(Fields.LAST_CRAWLED_TIME),
+				object.getDouble(Fields.PAGE_RANK_SCORE)
+			);
 	}
 	
 	public JSONObject toJSON() {
@@ -29,6 +32,7 @@ public abstract class WebDocument implements Identifiable {
 		
 		object
 			.put(Fields.ID, id)
+			.put(TYPE_FIELD, type)
 			.put(Fields.URL, url)
 			.put(Fields.LAST_CRAWLED_TIME, lastCrawledTime)
 			.put(Fields.PAGE_RANK_SCORE, pageRankScore);
@@ -54,6 +58,8 @@ public abstract class WebDocument implements Identifiable {
 		return pageRankScore;
 	}
 	
+	public abstract String getTypeName();
+	
 	// FIELD NAMES ======================================================================
 	
 	private static class Fields {
@@ -62,4 +68,6 @@ public abstract class WebDocument implements Identifiable {
 		public static final String LAST_CRAWLED_TIME = "last_crawled_time";
 		public static final String PAGE_RANK_SCORE = "page_rank_score";
 	}
+	
+	public static final String TYPE_FIELD = "type";
 }

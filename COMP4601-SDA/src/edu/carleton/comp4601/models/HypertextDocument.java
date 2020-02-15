@@ -9,7 +9,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
-final class HypertextDocument extends WebDocument {
+public final class HypertextDocument extends WebDocument {
 	private String title;
 	private List<String> links;
 	private List<ImageDescriptor> images;
@@ -130,5 +130,12 @@ final class HypertextDocument extends WebDocument {
 		public static final String IMAGES = "images";
 		public static final String PARAGRAPHS = "paragraphs";
 		public static final String HEADINGS = "headings";
+	}
+	
+	public static final String TYPE_NAME = "hypertext";
+
+	@Override
+	public String getTypeName() {
+		return TYPE_NAME;
 	}
 }

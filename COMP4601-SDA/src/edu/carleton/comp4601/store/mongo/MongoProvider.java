@@ -19,9 +19,9 @@ import edu.carleton.comp4601.models.Identifiable;
 import edu.carleton.comp4601.store.DocumentMapper;
 
 public final class MongoProvider<DocumentType extends Identifiable> {
-	private static MongoClient mongoClient = new MongoClient("localhost", 27017);
-	private static MongoDatabase db = mongoClient.getDatabase("crawler");
-	private static MongoCollection<Document> collection = db.getCollection("pages");
+	private final MongoClient mongoClient = new MongoClient("localhost", 27017);
+	private final MongoDatabase db = mongoClient.getDatabase("crawler");
+	private final MongoCollection<Document> collection;
 
 	private static final String SYSTEM_ID_FIELD = "_id";
 	
@@ -29,7 +29,8 @@ public final class MongoProvider<DocumentType extends Identifiable> {
 
 	// PUBLIC INTERFACE
 	
-	public MongoProvider(Supplier<? extends DocumentMapper<DocumentType>> mapperConstructor) {
+	public MongoProvider(Supplier<? extends DocumentMapper<DocumentType>> mapperConstructor, String collectionName) {
+		this.collection = db.getCollection(collectionName);
 		this.mapperConstructor = Objects.requireNonNull(mapperConstructor);
 	}
 
@@ -51,7 +52,13 @@ public final class MongoProvider<DocumentType extends Identifiable> {
 
 		Document document = c.next();
 
-		return mapperConstructor.get().deserialize(document);
+		try {
+			return mapperConstructor.get().deserialize(document);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 }

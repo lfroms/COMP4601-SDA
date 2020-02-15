@@ -5,5 +5,8 @@ import edu.carleton.comp4601.store.mongo.MongoMapper;
 import edu.carleton.comp4601.store.mongo.MongoProvider;
 
 public final class DataCoordinator {
-	private static MongoProvider<WebDocument> mongoProvider = new MongoProvider<>(MongoMapper::new);
+	private static final String DOCUMENTS_COLLECTION = "documents";
+
+	private static MongoProvider<WebDocument> mongoProvider = 
+			new MongoProvider<>(MongoMapper::new, DOCUMENTS_COLLECTION);
 }
