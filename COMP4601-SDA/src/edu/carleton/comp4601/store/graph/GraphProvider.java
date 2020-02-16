@@ -1,6 +1,5 @@
 package edu.carleton.comp4601.store.graph;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -33,7 +32,7 @@ public final class GraphProvider<DocumentType extends Identifiable & Locatable> 
 	}
 	
 	public Map<Integer, Double> getRanksForAllObjects() {
-		return new HashMap<Integer, Double>();
+		return PageRanker.computeRanks(graph);
 	}
 	
 	// PRIVATE HELPERS ==================================================================

@@ -1,7 +1,10 @@
 package edu.carleton.comp4601.store;
 
+import java.util.ArrayDeque;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.Queue;
 
 import edu.carleton.comp4601.models.WebDocument;
 import edu.carleton.comp4601.store.graph.GraphProvider;
@@ -28,20 +31,35 @@ public final class DataCoordinator implements Storable<WebDocument>, Searchable<
 	private static SearchableAndStorable<WebDocument> luceneIndex = 
 			new LuceneProvider<>(LuceneMapper::new);
 
-	private static Storable<WebDocument> graph = new GraphProvider<>();
+	private static GraphProvider<WebDocument> graph = new GraphProvider<>();
+	
+	Queue<WebDocument> queue = new ArrayDeque<WebDocument>();
 
 	@Override
 	public void upsert(WebDocument input) {
 		graph.upsert(input);
-		luceneIndex.upsert(input);
-		
-		// TODO: Calculate PageRank before adding all nodes to database.
-		documentsDatabase.upsert(input);	
+		queue.add(input);	
 	}
 
 	@Override
 	public Optional<WebDocument> find(Integer id) {
 		return documentsDatabase.find(id);
+	}
+	
+	public void processAndStoreData() {
+		System.out.println("NOTICE: Processing PageRank for graph...");
+		Map<Integer, Double> pageRanks = graph.getRanksForAllObjects();
+
+		System.out.println("NOTICE: Indexing and persisting documents...");
+		pageRanks.forEach((id, score) -> {
+			WebDocument document = queue.poll();
+			document.setPageRankScore(score);
+
+			documentsDatabase.upsert(document);
+			luceneIndex.upsert(document);
+		});
+		
+		queue.clear();
 	}
 
 	@Override
