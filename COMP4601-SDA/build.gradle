@@ -16,6 +16,9 @@ apply plugin: 'war'
 // WAR plugin configuration.
 webAppDirName = 'WebContent'
 
+targetCompatibility = '13'
+sourceCompatibility = '13'
+
 repositories {
 	// Use jcenter for resolving dependencies.
 	// You can declare any Maven/Ivy/file repository here.
