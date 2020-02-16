@@ -10,9 +10,6 @@ import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
 
 final class SDACrawlController {
 	private static final int NUM_CRAWLERS = 2;
-	private static final int MAX_DEPTH = 4;
-	private static final int POLITENESS_DELAY = 10;
-	private static final int MAX_PAGES = 300;
 	private static final String STORAGE_PATH = new File(System.getProperty("user.home"), "/Desktop/crawler.nosync").toString();
 	
 	public static void main(String[] args) throws Exception {
@@ -23,8 +20,8 @@ final class SDACrawlController {
         RobotstxtServer robotstxtServer = new RobotstxtServer(robotstxtConfig, pageFetcher);
         CrawlController controller = new CrawlController(config, pageFetcher, robotstxtServer);
 
-        controller.addSeed("https://weather.gc.ca/city/pages/on-118_metric_e.html");
-        controller.addSeed("https://lowpolycrafts.nz");
+        controller.addSeed("https://sikaman.dyndns.org:8443/WebSite/rest/site/courses/4601/handouts/");
+        controller.addSeed("https://sikaman.dyndns.org:8443/WebSite/rest/site/courses/4601/resources/");
 
         CrawlController.WebCrawlerFactory<Crawler> factory = Crawler::new;
         controller.start(factory, NUM_CRAWLERS);
@@ -34,9 +31,10 @@ final class SDACrawlController {
 	private static CrawlConfig getCrawlConfig() {
 		CrawlConfig config = new CrawlConfig();
         config.setCrawlStorageFolder(STORAGE_PATH);
-        config.setMaxDepthOfCrawling(MAX_DEPTH);
-        config.setPolitenessDelay(POLITENESS_DELAY);
-        config.setMaxPagesToFetch(MAX_PAGES);
+        config.setPolitenessDelay(200);
+        config.setIncludeHttpsPages(true);
+        config.setIncludeBinaryContentInCrawling(true);
+        config.setMaxDownloadSize(1_000_000_000);
         
         return config;
 	}

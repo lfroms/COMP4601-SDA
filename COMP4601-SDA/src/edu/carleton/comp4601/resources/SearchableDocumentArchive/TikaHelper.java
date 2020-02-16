@@ -24,7 +24,7 @@ final class TikaHelper {
 		
 		try {
 			parser.parse(stream, handler, metadata);
-			return handler.toString();
+			return cleanUpWhitespace(handler.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
@@ -38,5 +38,11 @@ final class TikaHelper {
 			e.printStackTrace();
 			return null;
 		}
+	}
+	
+	// PRIVATE HELPERS ==================================================================
+	
+	private String cleanUpWhitespace(String input) {
+		return input.replaceAll("\\s+", " ");
 	}
 }
