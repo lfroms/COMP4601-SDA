@@ -67,11 +67,14 @@ public final class DataCoordinator implements Storable<WebDocument>, Searchable<
 		Map<Integer, Double> pageRanks = graphProvider.getRanksForAllObjects();
 
 		System.out.println("NOTICE: Indexing and persisting documents...");
-		pageRanks.forEach((id, score) -> {
-			WebDocument document = queue.poll();
-			document.setPageRankScore(score);
 
-			documentsDatabase.upsert(document);
+		pageRanks.forEach((id, score) -> {
+			if (!queue.isEmpty()) {
+				WebDocument document = queue.remove();
+				document.setPageRankScore(score);
+	
+				documentsDatabase.upsert(document);
+			}
 		});
 		
 		queue.clear();
