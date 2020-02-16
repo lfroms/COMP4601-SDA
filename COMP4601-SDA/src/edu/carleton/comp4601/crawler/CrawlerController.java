@@ -9,7 +9,7 @@ import edu.uci.ics.crawler4j.fetcher.PageFetcher;
 import edu.uci.ics.crawler4j.robotstxt.RobotstxtConfig;
 import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
 
-final class SDACrawlController {
+final class CrawlerController {
 	private static final int NUM_CRAWLERS = 2;
 	private static final String STORAGE_PATH = new File(System.getProperty("user.home"), "/Desktop/crawler.nosync").toString();
 	
@@ -23,7 +23,7 @@ final class SDACrawlController {
         RobotstxtServer robotstxtServer = new RobotstxtServer(robotstxtConfig, pageFetcher);
         CrawlController controller = new CrawlController(config, pageFetcher, robotstxtServer);
 
-//        controller.addSeed("https://sikaman.dyndns.org:8443/WebSite/rest/site/courses/4601/handouts/");
+        controller.addSeed("https://sikaman.dyndns.org:8443/WebSite/rest/site/courses/4601/handouts/");
         controller.addSeed("https://sikaman.dyndns.org:8443/WebSite/rest/site/courses/4601/resources/");
 
         CrawlController.WebCrawlerFactory<Crawler> factory = Crawler::new;
