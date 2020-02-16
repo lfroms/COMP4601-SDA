@@ -8,6 +8,7 @@ import java.util.Queue;
 
 import edu.carleton.comp4601.models.WebDocument;
 import edu.carleton.comp4601.store.graph.GraphProvider;
+import edu.carleton.comp4601.store.graph.GraphMapper;
 import edu.carleton.comp4601.store.index.LuceneMapper;
 import edu.carleton.comp4601.store.index.LuceneProvider;
 import edu.carleton.comp4601.store.mongo.MongoDBConfig;
@@ -31,13 +32,14 @@ public final class DataCoordinator implements Storable<WebDocument>, Searchable<
 	private static SearchableAndStorable<WebDocument> luceneIndex = 
 			new LuceneProvider<>(LuceneMapper::new);
 
-	private static GraphProvider<WebDocument> graph = new GraphProvider<>();
+	private static GraphProvider<WebDocument> graph = new GraphProvider<>(GraphMapper::new);
 	
 	Queue<WebDocument> queue = new ArrayDeque<WebDocument>();
 
 	@Override
 	public void upsert(WebDocument input) {
 		graph.upsert(input);
+		luceneIndex.upsert(input);
 		queue.add(input);	
 	}
 
@@ -56,7 +58,6 @@ public final class DataCoordinator implements Storable<WebDocument>, Searchable<
 			document.setPageRankScore(score);
 
 			documentsDatabase.upsert(document);
-			luceneIndex.upsert(document);
 		});
 		
 		queue.clear();

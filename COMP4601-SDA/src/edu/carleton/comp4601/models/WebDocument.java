@@ -4,7 +4,7 @@ import org.json.JSONObject;
 
 import edu.uci.ics.crawler4j.url.WebURL;
 
-public abstract class WebDocument implements Identifiable, Locatable {
+public abstract class WebDocument implements Identifiable, Locatable, JSONSerializable {
 	private final Integer id;
 	private final String typeName;
 	private final WebURL url;
@@ -87,6 +87,4 @@ public abstract class WebDocument implements Identifiable, Locatable {
 		public static final String LAST_CRAWLED_TIME = "last_crawled_time";
 		public static final String PAGE_RANK_SCORE = "page_rank_score";
 	}
-	
-	public static final String TYPE_FIELD = "type";
 }
