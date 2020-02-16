@@ -40,6 +40,8 @@ public final class LuceneProvider<DocumentType extends Identifiable> extends Map
 		
 		try {
 			writer = createWriter();
+			writer.commit();
+			
 			searcher = createSearcher();
 
 		} catch (IOException e) {
