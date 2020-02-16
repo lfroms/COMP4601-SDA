@@ -81,8 +81,7 @@ public final class LuceneProvider<DocumentType extends Identifiable> extends Map
 
 	@Override
 	public Optional<DocumentType> find(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Cannot use find on LuceneProvider. Use #search(String terms) instead.");
 	}
 
 	@Override
