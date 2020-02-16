@@ -1,5 +1,6 @@
 package edu.carleton.comp4601.resources.SearchableDocumentArchive;
 
+import java.io.ByteArrayInputStream;
 import java.util.regex.Pattern;
 
 import edu.carleton.comp4601.models.BinaryDocument;
@@ -17,8 +18,7 @@ final class Crawler extends WebCrawler {
 	private final static Pattern FILTERS = Pattern.compile(".*(\\.(css|js|mp3|mp4|zip|gz))$");
 
 	private String[] supportedUrls = {
-			"https://weather.gc.ca",
-			"https://lowpolycrafts.nz"
+			"https://sikaman.dyndns.org"
 	};
 	
 	@Override
@@ -63,13 +63,20 @@ final class Crawler extends WebCrawler {
 	
 	private void handleMiscellaneousDocuments(Page page) {
 		WebURL webUrl = page.getWebURL();
+		
+		byte[] contentData = page.getContentData();
+		ByteArrayInputStream dataStream = new ByteArrayInputStream(contentData);
+		TikaHelper tikaHelper = new TikaHelper(dataStream);
+
 
 		WebDocument vertex = new BinaryDocument(
 				webUrl.getDocid(),
 				webUrl,
 				getCurrentUnixTimestamp(),
 				0.0,
-				page.getContentData()
+				tikaHelper.getMimeType(),
+				contentData.length,
+				tikaHelper.createInferredContent()
 			);
 		
 		dataCoordinator.upsert(vertex);

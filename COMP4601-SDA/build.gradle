@@ -6,13 +6,12 @@
  * User Manual available at https://docs.gradle.org/6.0/userguide/java_library_plugin.html
  */
  
-plugins {
-	// http://gradle.org/docs/current/userguide/war_plugin.html
-	id 'war'
-	
-	// See http://gradle.org/docs/current/userguide/java_plugin.html
-	id 'java-library'
-}
+// See http://gradle.org/docs/current/userguide/java_plugin.html
+apply plugin: 'java-library'
+
+// http://gradle.org/docs/current/userguide/war_plugin.html
+apply plugin: 'war'
+ 
 
 // WAR plugin configuration.
 webAppDirName = 'WebContent'
@@ -27,12 +26,12 @@ sourceSets {
     main {
         // Specify Java source code location.
         java {
-            srcDir 'Java Resources/src'
+            srcDir 'src'
         }
 
         // Specify classpath resource location.
         resources {
-            srcDir 'Java Resources/src'
+            srcDir 'src'
         }
     }
 }
@@ -51,4 +50,5 @@ dependencies {
     compile group: 'com.google.guava', name: 'guava', version: '28.2-jre'
     compile group: 'jgraph', name: 'jgraph', version: '5.13.0.0'
     compile group: 'org.apache.lucene', name: 'lucene-core', version: '8.4.1'
+    compile group: 'org.apache.tika', name: 'tika-parsers', version: '1.23'
 }
