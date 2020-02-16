@@ -1,23 +1,23 @@
 package edu.carleton.comp4601.store;
 
 import java.util.ArrayDeque;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Queue;
 
 import org.jgrapht.io.ExportException;
 
+import edu.carleton.comp4601.dao.DocumentCollection;
 import edu.carleton.comp4601.models.SaveableGraph;
 import edu.carleton.comp4601.models.WebDocument;
-import edu.carleton.comp4601.store.graph.GraphProvider;
 import edu.carleton.comp4601.store.graph.GraphMapper;
+import edu.carleton.comp4601.store.graph.GraphProvider;
 import edu.carleton.comp4601.store.index.LuceneMapper;
 import edu.carleton.comp4601.store.index.LuceneProvider;
 import edu.carleton.comp4601.store.mongo.GraphMongoMapper;
 import edu.carleton.comp4601.store.mongo.MongoDBConfig;
-import edu.carleton.comp4601.store.mongo.WebDocumentMongoMapper;
 import edu.carleton.comp4601.store.mongo.MongoProvider;
+import edu.carleton.comp4601.store.mongo.WebDocumentMongoMapper;
 
 public final class DataCoordinator implements Storable<WebDocument>, Searchable<WebDocument> {
 	private static DataCoordinator singleInstance = null;
@@ -83,11 +83,11 @@ public final class DataCoordinator implements Storable<WebDocument>, Searchable<
 	}
 
 	@Override
-	public List<WebDocument> search(String terms) {
+	public DocumentCollection search(String terms) {
 		return luceneIndex.search(terms);
 	}
 	
-	public List<WebDocument> searchDistributed(String terms) {
+	public DocumentCollection searchDistributed(String terms) {
 		// TODO Implement using DS
 		return null;
 	}
