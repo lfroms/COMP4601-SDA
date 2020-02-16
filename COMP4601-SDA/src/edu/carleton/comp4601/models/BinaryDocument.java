@@ -1,7 +1,10 @@
 package edu.carleton.comp4601.models;
 
+import java.io.ByteArrayInputStream;
+
 import org.json.JSONObject;
 
+import edu.carleton.comp4601.resources.SearchableDocumentArchive.TikaHelper;
 import edu.uci.ics.crawler4j.url.WebURL;
 
 public final class BinaryDocument extends WebDocument {
@@ -18,8 +21,13 @@ public final class BinaryDocument extends WebDocument {
 
 		super(id, url, lastCrawledTime, pageRankScore);
 		
+		
+		ByteArrayInputStream dataStream = new ByteArrayInputStream(data);
+		TikaHelper tikaHelper = new TikaHelper(dataStream);
+
+		this.mimeType = tikaHelper.getMimeType();
 		this.sizeInBytes = data.length;
-		// TODO: Implement Tika
+		this.inferredContent = tikaHelper.createInferredContent();
 	}
 
 	// JSON SERIALIZATION ===============================================================

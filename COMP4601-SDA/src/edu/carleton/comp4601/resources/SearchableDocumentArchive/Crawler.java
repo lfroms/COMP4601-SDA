@@ -14,7 +14,7 @@ import edu.uci.ics.crawler4j.url.WebURL;
 final class Crawler extends WebCrawler {
 	private final static DataCoordinator dataCoordinator = DataCoordinator.getInstance();
 	
-	private final static Pattern FILTERS = Pattern.compile(".*(\\.(css|js|gif|jpg|png|mp3|mp4|zip|gz|pdf))$");
+	private final static Pattern FILTERS = Pattern.compile(".*(\\.(css|js|mp3|mp4|zip|gz))$");
 
 	private String[] supportedUrls = {
 			"https://weather.gc.ca",
@@ -30,18 +30,18 @@ final class Crawler extends WebCrawler {
 
 	@Override
 	public void visit(Page page) {
-		Boolean isWebDocument = pageIsWebDocument(page);
+		Boolean isHypertextDocument = isHypertextDocument(page);
 		
-		if (isWebDocument) {
-			handleWebDocument(page);
+		if (isHypertextDocument) {
+			handleHypertextDocument(page);
 		} else {
-			handleBinaryDocument(page);
+			handleMiscellaneousDocuments(page);
 		}
 	}
 	
 	// PRIVATE HELPERS ==================================================================
 	
-	private void handleWebDocument(Page page) {
+	private void handleHypertextDocument(Page page) {
 		HtmlParseData htmlParseData = (HtmlParseData) page.getParseData();
 		
 		if (htmlParseData instanceof HtmlParseData == false) {
@@ -61,9 +61,9 @@ final class Crawler extends WebCrawler {
 		dataCoordinator.upsert(vertex);
 	}
 	
-	private void handleBinaryDocument(Page page) {
+	private void handleMiscellaneousDocuments(Page page) {
 		WebURL webUrl = page.getWebURL();
-		
+
 		WebDocument vertex = new BinaryDocument(
 				webUrl.getDocid(),
 				webUrl,
@@ -75,7 +75,7 @@ final class Crawler extends WebCrawler {
 		dataCoordinator.upsert(vertex);
 	}
 	
-	private Boolean pageIsWebDocument(Page page) {
+	private Boolean isHypertextDocument(Page page) {
 		return page.getContentType().contains("html");
 	}
 	
