@@ -1,4 +1,4 @@
-package edu.carleton.comp4601.resources.SearchableDocumentArchive;
+package edu.carleton.comp4601.crawler;
 
 import java.io.ByteArrayInputStream;
 import java.util.regex.Pattern;

@@ -1,4 +1,4 @@
-package edu.carleton.comp4601.resources.SearchableDocumentArchive;
+package edu.carleton.comp4601.crawler;
 
 import java.io.File;
 
@@ -23,7 +23,7 @@ final class SDACrawlController {
         RobotstxtServer robotstxtServer = new RobotstxtServer(robotstxtConfig, pageFetcher);
         CrawlController controller = new CrawlController(config, pageFetcher, robotstxtServer);
 
-        controller.addSeed("https://sikaman.dyndns.org:8443/WebSite/rest/site/courses/4601/handouts/");
+//        controller.addSeed("https://sikaman.dyndns.org:8443/WebSite/rest/site/courses/4601/handouts/");
         controller.addSeed("https://sikaman.dyndns.org:8443/WebSite/rest/site/courses/4601/resources/");
 
         CrawlController.WebCrawlerFactory<Crawler> factory = Crawler::new;
@@ -42,6 +42,8 @@ final class SDACrawlController {
         config.setIncludeBinaryContentInCrawling(true);
         config.setMaxDownloadSize(1_000_000_000);
         config.setResumableCrawling(true);
+        
+        config.setMaxPagesToFetch(1500);
         
         return config;
 	}

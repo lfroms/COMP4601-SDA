@@ -9,7 +9,7 @@ import edu.carleton.comp4601.models.WebDocument;
 import edu.carleton.comp4601.store.ApplicationSpecificMapper;
 import edu.carleton.comp4601.store.DocumentMapper;
 
-public final class MongoMapper extends ApplicationSpecificMapper implements DocumentMapper<WebDocument, Document> {
+public final class WebDocumentMongoMapper extends ApplicationSpecificMapper implements DocumentMapper<WebDocument, Document> {
 
 	@Override
 	public Document serialize(WebDocument input) {

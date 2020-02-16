@@ -19,7 +19,7 @@ import edu.carleton.comp4601.models.Identifiable;
 import edu.carleton.comp4601.models.Locatable;
 import edu.carleton.comp4601.store.Storable;
 
-public final class GraphProvider<DocumentType extends Identifiable & Locatable>  implements Storable<DocumentType>  {
+public final class GraphProvider<DocumentType extends Identifiable & Locatable> implements Storable<DocumentType>  {
 	private final Supplier<? extends DocumentToGraphMapper<DocumentType, DefaultEdge>> mapperConstructor;
 	
 	private Graph<DocumentType, DefaultEdge> graph = new DirectedMultigraph<>(DefaultEdge.class);
