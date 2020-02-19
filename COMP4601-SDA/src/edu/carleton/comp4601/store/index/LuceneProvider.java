@@ -107,8 +107,8 @@ public final class LuceneProvider<DocumentType extends Identifiable> extends Map
 	
 	private static TopDocs searchDocuments(String terms, IndexSearcher searcher) throws Exception {
 		QueryParser qp = new QueryParser(IndexDocumentFields.CONTENT, new StandardAnalyzer());
-        Query firstNameQuery = qp.parse(terms);
-        TopDocs hits = searcher.search(firstNameQuery, 10);
+        Query query = qp.parse(terms);
+        TopDocs hits = searcher.search(query, 100);
         return hits;
 	}
 	
