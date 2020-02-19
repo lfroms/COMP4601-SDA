@@ -134,8 +134,15 @@ public final class LuceneProvider<DocumentType extends Identifiable> extends Map
 		ArrayList<edu.carleton.comp4601.dao.Document> documents = new ArrayList<>();
 		
 		for (ScoreDoc doc : scoreDocs) {
-			edu.carleton.comp4601.dao.Document deserializedDocument = luceneMapper.deserialize(doc);
-			documents.add(deserializedDocument);
+			edu.carleton.comp4601.dao.Document deserializedDocument;
+			try {
+				deserializedDocument = luceneMapper.deserialize(searcher.doc(doc.doc), doc);
+				documents.add(deserializedDocument);
+
+			} catch (IOException e) {
+				e.printStackTrace();
+				System.err.println("Unable to deserialize a Lucene document. Skipping...");
+			}
 		}
 		
 		return documents;

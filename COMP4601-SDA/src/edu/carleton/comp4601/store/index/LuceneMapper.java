@@ -37,8 +37,16 @@ public final class LuceneMapper implements DocumentMapper<WebDocument, Document>
 		throw new UnsupportedOperationException("No way to deserialize Lucene document into WebDocument.");
 	}
 
-	public edu.carleton.comp4601.dao.Document deserialize(ScoreDoc input) {
-		// TODO implement deserialization into Document
-		return null;
+	public edu.carleton.comp4601.dao.Document deserialize(Document input, ScoreDoc scoreDoc) {
+		edu.carleton.comp4601.dao.Document output = new edu.carleton.comp4601.dao.Document();
+		
+		output.setId(Integer.valueOf(input.get(IndexDocumentFields.ID)));
+		// TODO: Set a name.
+		output.setName("test doc name");
+		output.setScore(scoreDoc.score);
+		output.setContent(input.get(IndexDocumentFields.CONTENT));
+		output.setUrl(input.get(IndexDocumentFields.URL));
+
+		return output;
 	}
 }
