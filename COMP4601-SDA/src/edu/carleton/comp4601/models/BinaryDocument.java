@@ -46,6 +46,20 @@ public final class BinaryDocument extends WebDocument {
 
 		return object;
 	}
+	
+	// GETTERS ==========================================================================
+	
+	public String getMimeType() {
+		return mimeType;
+	}
+	
+	public Integer getSize() {
+		return sizeInBytes;
+	}
+	
+	public String getContent() {
+		return inferredContent;
+	}
 
 	// FIELD NAMES ======================================================================
 

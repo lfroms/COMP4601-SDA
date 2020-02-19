@@ -126,6 +126,12 @@ public final class HypertextDocument extends WebDocument {
 
 		return parsedValues;
 	}
+	
+	// GETTERS ==========================================================================
+	
+	public String getGeneratedContentString() {		
+		return String.join(" ", headings) + String.join(" ", paragraphs);
+	}
 
 	// FIELD NAMES ======================================================================
 

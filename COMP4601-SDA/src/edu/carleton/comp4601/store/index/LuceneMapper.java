@@ -3,6 +3,7 @@ package edu.carleton.comp4601.store.index;
 import java.lang.reflect.InvocationTargetException;
 
 import org.apache.lucene.document.Document;
+import org.apache.lucene.document.StoredField;
 import org.apache.lucene.search.ScoreDoc;
 
 import edu.carleton.comp4601.models.BinaryDocument;
@@ -16,16 +17,30 @@ public final class LuceneMapper implements DocumentMapper<WebDocument, Document>
 	public Document serialize(WebDocument input) {
 		String typeName = input.getTypeName();
 		
+		Document baseDocument = createBaseDocument(input);
+		
 		switch(typeName) {
 		case HypertextDocument.TYPE_NAME:
 			HypertextDocumentLuceneMapper hypertextMapper = new HypertextDocumentLuceneMapper();
 			
-			return hypertextMapper.serialize((HypertextDocument) input);
+			Document serializedHypertext = hypertextMapper.serialize((HypertextDocument) input);
+			
+			serializedHypertext.forEach(field -> {
+				baseDocument.add(field);
+			});
+			
+			return baseDocument;
 			
 		case BinaryDocument.TYPE_NAME:
 			BinaryDocumentLuceneMapper binaryMapper = new BinaryDocumentLuceneMapper();
 			
-			return binaryMapper.serialize((BinaryDocument) input);
+			Document serializedBinary = binaryMapper.serialize((BinaryDocument) input);
+			
+			serializedBinary.forEach(field -> {
+				baseDocument.add(field);
+			});
+			
+			return baseDocument;
 		}
 		
 		throw new RuntimeException("No mapper available to serialize \"" + typeName + "\"");
@@ -47,6 +62,22 @@ public final class LuceneMapper implements DocumentMapper<WebDocument, Document>
 		output.setContent(input.get(IndexDocumentFields.CONTENT));
 		output.setUrl(input.get(IndexDocumentFields.URL));
 
+		return output;
+	}
+	
+	// PRIVATE HELPERS ==================================================================
+	
+	public static Document createBaseDocument(WebDocument input) {
+		Document output = new Document();
+		
+		output.add(new StoredField(IndexDocumentFields.ID, input.getId()));
+		
+		// TODO: Give a proper name
+		output.add(new StoredField(IndexDocumentFields.INDEXED_BY, "AppName"));
+		
+		output.add(new StoredField(IndexDocumentFields.URL, input.getURL().toString()));
+		output.add(new StoredField(IndexDocumentFields.DATE, input.getLastCrawledTime()));
+		
 		return output;
 	}
 }

@@ -106,8 +106,7 @@ public final class LuceneProvider<DocumentType extends Identifiable> extends Map
 	// PRIVATE HELPERS ==================================================================
 	
 	private static TopDocs searchDocuments(String terms, IndexSearcher searcher) throws Exception {
-		// TODO change content to proper field.  Also need to implement fields.
-		QueryParser qp = new QueryParser("content", new StandardAnalyzer());
+		QueryParser qp = new QueryParser(IndexDocumentFields.CONTENT, new StandardAnalyzer());
         Query firstNameQuery = qp.parse(terms);
         TopDocs hits = searcher.search(firstNameQuery, 10);
         return hits;
