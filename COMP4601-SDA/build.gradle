@@ -55,4 +55,7 @@ dependencies {
     compile group: 'org.apache.lucene', name: 'lucene-core', version: '8.4.1'
     compile group: 'org.apache.lucene', name: 'lucene-queryparser', version: '8.4.1'
     compile group: 'org.apache.tika', name: 'tika-parsers', version: '1.23'
+    compile group: 'org.glassfish.jersey.core', name: 'jersey-client', version: '2.30'
+    compile group: 'org.glassfish.jersey.containers', name: 'jersey-container-servlet', version: '2.30'
+    compile group: 'org.glassfish.jersey.inject', name: 'jersey-hk2', version: '2.30'
 }
