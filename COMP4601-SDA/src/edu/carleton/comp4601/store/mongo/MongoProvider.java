@@ -48,7 +48,7 @@ public final class MongoProvider<DocumentType extends Identifiable> extends Mapp
 		MongoCursor<Document> c = cursor.iterator();
 
 		if (!c.hasNext()) {
-			return null;
+			return Optional.empty();
 		}
 
 		Document document = c.next();
@@ -58,7 +58,7 @@ public final class MongoProvider<DocumentType extends Identifiable> extends Mapp
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			return null;
+			return Optional.empty();
 		}
 	}
 

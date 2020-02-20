@@ -30,7 +30,7 @@ public final class WebDocumentMongoMapper extends ApplicationSpecificMapper impl
 		
 		String typeName = parsedJSON.getString(WebDocument.TYPE_FIELD);
 		Class<? extends WebDocument> Clazz = classForTypeName(typeName);
-		
-		return Clazz.getDeclaredConstructor().newInstance(parsedJSON);
+
+		return Clazz.getDeclaredConstructor(JSONObject.class).newInstance(parsedJSON);
 	}
 }
