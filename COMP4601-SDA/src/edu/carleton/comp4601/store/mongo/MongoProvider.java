@@ -1,5 +1,7 @@
 package edu.carleton.comp4601.store.mongo;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.function.Supplier;
 
@@ -16,7 +18,9 @@ import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.ReplaceOptions;
 
 import edu.carleton.comp4601.models.Identifiable;
+import edu.carleton.comp4601.models.WebDocument;
 import edu.carleton.comp4601.store.DocumentMapper;
+import edu.carleton.comp4601.store.List;
 import edu.carleton.comp4601.store.MappableProvider;
 import edu.carleton.comp4601.store.Storable;
 
@@ -60,6 +64,26 @@ public final class MongoProvider<DocumentType extends Identifiable> extends Mapp
 			e.printStackTrace();
 			return Optional.empty();
 		}
+	}
+	
+	public final ArrayList<DocumentType> getAll() {
+		ArrayList<DocumentType> output = new ArrayList<>();
+		
+		FindIterable<Document> cursor = collection.find();
+		MongoCursor<Document> c = cursor.iterator();
+		
+		while (c.hasNext()) {
+			Document obj = c.next();
+			
+			try {
+				output.add(mapperConstructor.get().deserialize(obj));
+			} catch (Exception e) {
+				System.err.println("Could not deserialize document with id " + obj.getInteger(SYSTEM_ID_FIELD) + ". Skipping...");
+				e.printStackTrace();
+			}
+		}
+		
+		return output;
 	}
 
 	@Override

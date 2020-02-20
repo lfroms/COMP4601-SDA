@@ -57,6 +57,7 @@ public final class BinaryDocument extends WebDocument {
 		return sizeInBytes;
 	}
 	
+	@Override
 	public String getContent() {
 		return inferredContent;
 	}

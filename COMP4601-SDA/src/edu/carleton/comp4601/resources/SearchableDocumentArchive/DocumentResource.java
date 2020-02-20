@@ -7,25 +7,25 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import edu.carleton.comp4601.store.DataCoordinator;
-
-
 @Path("sda/{id: [0-9]*}")
 public class DocumentResource {
 	private final static String PARAM_NAME = "id";
 	
-	private final DataCoordinator coordinator = DataCoordinator.getInstance();
+	@GET
+	@Produces(MediaType.TEXT_HTML)
+	public String getHTML(@PathParam(PARAM_NAME) String id) {
+		return DocumentInterface.getSingleHTML(mapId(id));
+	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public String get(@PathParam(PARAM_NAME) String id) {
-		// TODO Need to run this through DocumentInterface when accessing coordinator and transforming.
-		return coordinator.find(mapId(id)).get().toJSON().toString();
+	public String getJSON(@PathParam(PARAM_NAME) String id) {
+		return DocumentInterface.getSingleJSON(mapId(id));
 	}
 	
 	@DELETE
 	public void delete(@PathParam(PARAM_NAME) String id) {
-		coordinator.delete(mapId(id));
+		DocumentInterface.delete(mapId(id));
 	}
 	
 	// PRIVATE HELPERS ==================================================================

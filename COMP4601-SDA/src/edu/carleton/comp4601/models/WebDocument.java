@@ -70,6 +70,8 @@ public abstract class WebDocument implements Identifiable, Locatable, JSONSerial
 		return pageRankScore;
 	}
 	
+	public abstract String getContent();
+	
 	public abstract String getTypeName();
 	
 	// SETTERS ==========================================================================

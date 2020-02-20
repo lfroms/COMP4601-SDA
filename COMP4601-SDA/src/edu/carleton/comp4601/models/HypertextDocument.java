@@ -129,7 +129,8 @@ public final class HypertextDocument extends WebDocument {
 	
 	// GETTERS ==========================================================================
 	
-	public String getGeneratedContentString() {		
+	@Override
+	public String getContent() {		
 		return String.join(" ", headings) + String.join(" ", paragraphs);
 	}
 

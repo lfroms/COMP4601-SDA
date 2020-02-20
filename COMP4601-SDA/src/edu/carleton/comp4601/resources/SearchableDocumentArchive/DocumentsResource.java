@@ -9,10 +9,15 @@ import javax.ws.rs.core.MediaType;
 public class DocumentsResource {
 	
 	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getJSON() {
+		return DocumentsInterface.getMultiJSON();
+	}
+	
+	@GET
 	@Produces(MediaType.TEXT_HTML)
 	public String getHTML() {
-		// TODO Return HTML
-		return "";
+		return DocumentsInterface.getMultiHTML();
 	}
 	
 	@GET

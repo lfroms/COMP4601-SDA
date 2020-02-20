@@ -14,7 +14,7 @@ final class HypertextDocumentLuceneMapper implements DocumentMapper<HypertextDoc
 	public Document serialize(HypertextDocument input) {
 		Document output = new Document();
 		
-		output.add(new StoredField(IndexDocumentFields.CONTENT, input.getGeneratedContentString()));
+		output.add(new StoredField(IndexDocumentFields.CONTENT, input.getContent()));
 		output.add(new StoredField(IndexDocumentFields.TYPE, "text/html"));
 		
 		return output;

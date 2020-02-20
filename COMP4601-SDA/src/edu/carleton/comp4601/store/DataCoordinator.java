@@ -1,6 +1,7 @@
 package edu.carleton.comp4601.store;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Queue;
@@ -32,7 +33,7 @@ public final class DataCoordinator implements Storable<WebDocument>, Searchable<
 	
 	// STORABLE INSTANCES ===============================================================
 	
-	private static Storable<WebDocument> documentsDatabase = 
+	private static MongoProvider<WebDocument> documentsDatabase = 
 			new MongoProvider<>(WebDocumentMongoMapper::new, getDocumentsDatabaseConfig());
 	
 	private static Storable<SaveableGraph> graphsDatabase = 
@@ -60,6 +61,10 @@ public final class DataCoordinator implements Storable<WebDocument>, Searchable<
 	@Override
 	public Optional<WebDocument> find(Integer id) {
 		return documentsDatabase.find(id);
+	}
+	
+	public ArrayList<WebDocument> getAll() {
+		return documentsDatabase.getAll();
 	}
 	
 	@Override
