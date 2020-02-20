@@ -14,4 +14,7 @@
   	<servlet-name>COMP4601 Searchable Document Archive Service</servlet-name>
   	<url-pattern>/rest/*</url-pattern>
   </servlet-mapping>
+  <listener>
+	<listener-class>edu.carleton.comp4601.store.SearchServiceManagerContextListener</listener-class>
+  </listener>
 </web-app>

@@ -1,13 +1,16 @@
 package edu.carleton.comp4601.store;
 
+import java.io.IOException;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Queue;
+import java.util.concurrent.TimeUnit;
 
 import org.jgrapht.io.ExportException;
 
+import edu.carleton.comp4601.dao.Document;
 import edu.carleton.comp4601.dao.DocumentCollection;
 import edu.carleton.comp4601.models.SaveableGraph;
 import edu.carleton.comp4601.models.WebDocument;
@@ -19,6 +22,10 @@ import edu.carleton.comp4601.store.mongo.GraphMongoMapper;
 import edu.carleton.comp4601.store.mongo.MongoDBConfig;
 import edu.carleton.comp4601.store.mongo.MongoProvider;
 import edu.carleton.comp4601.store.mongo.WebDocumentMongoMapper;
+import edu.carleton.comp4601.utility.SDAConstants;
+import edu.carleton.comp4601.utility.SearchException;
+import edu.carleton.comp4601.utility.SearchResult;
+import edu.carleton.comp4601.utility.SearchServiceManager;
 
 public final class DataCoordinator implements Storable<WebDocument>, Searchable<WebDocument> {
 	private static DataCoordinator singleInstance = null;
@@ -100,8 +107,34 @@ public final class DataCoordinator implements Storable<WebDocument>, Searchable<
 	}
 	
 	public DocumentCollection searchDistributed(String terms) {
-		// TODO Implement using DS
-		return null;
+		DocumentCollection output = new DocumentCollection();
+
+		SearchResult sr;
+		
+		try {
+			sr = SearchServiceManager.getInstance().search(terms);
+			
+		} catch (ClassNotFoundException | IOException | SearchException e1) {
+			e1.printStackTrace();
+			return output;
+		}
+
+		// Perform local search.
+		ArrayList<Document> docs = search(terms).getDocuments();
+
+		// Wait 10 seconds.
+		try {
+			sr.await(SDAConstants.TIMEOUT, TimeUnit.SECONDS);
+		} catch (InterruptedException e) {
+		} finally {
+			SearchServiceManager.getInstance().reset();
+		}
+		
+		// Merge documents.
+		docs.addAll(sr.getDocs());
+		output.setDocuments(docs);
+		
+		return output;
 	}
 	
 	// PRIVATE HELPERS ==================================================================
