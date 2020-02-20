@@ -3,6 +3,8 @@ package edu.carleton.comp4601.crawler;
 import java.io.ByteArrayInputStream;
 import java.util.regex.Pattern;
 
+import org.apache.commons.io.FilenameUtils;
+
 import edu.carleton.comp4601.models.BinaryDocument;
 import edu.carleton.comp4601.models.HypertextDocument;
 import edu.carleton.comp4601.models.WebDocument;
@@ -70,7 +72,7 @@ final class Crawler extends WebCrawler {
 
 		WebDocument vertex = new BinaryDocument(
 				webUrl.getDocid(),
-				webUrl.getPath(),
+				FilenameUtils.getPath(webUrl.getPath()),
 				webUrl,
 				getCurrentUnixTimestamp(),
 				0.0,
