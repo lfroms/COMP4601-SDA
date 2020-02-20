@@ -18,5 +18,11 @@ public interface Storable<DataType extends Identifiable> {
 	 * @return The object.
 	 */
 	public Optional<DataType> find(Integer id);
-
+	
+	/**
+	 * 
+	 * @param id
+	 */
+	public void delete(Integer id);
+	
 }

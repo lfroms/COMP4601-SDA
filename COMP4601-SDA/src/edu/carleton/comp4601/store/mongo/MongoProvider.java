@@ -61,4 +61,10 @@ public final class MongoProvider<DocumentType extends Identifiable> extends Mapp
 			return null;
 		}
 	}
+
+	@Override
+	public void delete(Integer id) {
+		Bson filter = Filters.eq(SYSTEM_ID_FIELD, id);
+		collection.deleteOne(filter);
+	}
 }

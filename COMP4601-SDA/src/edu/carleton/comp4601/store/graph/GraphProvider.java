@@ -43,6 +43,16 @@ public final class GraphProvider<DocumentType extends Identifiable & Locatable> 
 		return graph.vertexSet().stream().filter(x -> x.getId() == id).findFirst();
 	}
 	
+	@Override
+	public void delete(Integer id) {
+		try {
+			graph.removeVertex(find(id).get());
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println("Could not find graph node with id " + id + ". Skipping...");
+		}
+	}
+	
 	public Map<Integer, Double> getRanksForAllObjects() {
 		return PageRanker.computeRanks(graph);
 	}
@@ -84,5 +94,4 @@ public final class GraphProvider<DocumentType extends Identifiable & Locatable> 
 			return false;
 		}
 	}
-
 }

@@ -14,6 +14,7 @@ import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
+import org.apache.lucene.index.Term;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
@@ -84,6 +85,16 @@ public final class LuceneProvider<DocumentType extends Identifiable> extends Map
 	@Override
 	public Optional<DocumentType> find(Integer id) {
 		throw new UnsupportedOperationException("Cannot use find on LuceneProvider. Use #search(String terms) instead.");
+	}
+	
+	@Override
+	public void delete(Integer id) {
+		try {
+			writer.deleteDocuments(new Term("id", String.valueOf(id)));
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.err.println("Could not delete Lucene document with id " + id + ". Skipping...");
+		}
 	}
 
 	@Override
