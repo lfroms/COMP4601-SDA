@@ -90,7 +90,7 @@ public final class LuceneProvider<DocumentType extends Identifiable> extends Map
 	@Override
 	public void delete(Integer id) {
 		try {
-			writer.deleteDocuments(new Term("id", String.valueOf(id)));
+			writer.deleteDocuments(new Term(IndexDocumentFields.ID, String.valueOf(id)));
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.err.println("Could not delete Lucene document with id " + id + ". Skipping...");
@@ -143,10 +143,11 @@ public final class LuceneProvider<DocumentType extends Identifiable> extends Map
 		LuceneMapper luceneMapper = (LuceneMapper) mapperConstructor.get();
 		ArrayList<edu.carleton.comp4601.dao.Document> documents = new ArrayList<>();
 		
-		for (ScoreDoc doc : scoreDocs) {
-			edu.carleton.comp4601.dao.Document deserializedDocument;
+		for (ScoreDoc scoreDoc : scoreDocs) {
 			try {
-				deserializedDocument = luceneMapper.deserialize(searcher.doc(doc.doc), doc);
+				edu.carleton.comp4601.dao.Document deserializedDocument = 
+						luceneMapper.deserialize(searcher.doc(scoreDoc.doc), scoreDoc);
+				
 				documents.add(deserializedDocument);
 
 			} catch (IOException e) {

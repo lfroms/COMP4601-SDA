@@ -15,7 +15,6 @@ final class BinaryDocumentLuceneMapper implements DocumentMapper<BinaryDocument,
 	public Document serialize(BinaryDocument input) {
 		Document output = new Document();
 		
-		output.add(new StringField(IndexDocumentFields.CONTENT, input.getContent(), Field.Store.YES));
 		output.add(new StringField(IndexDocumentFields.TYPE, input.getMimeType(), Field.Store.YES));
 		
 		return output;
