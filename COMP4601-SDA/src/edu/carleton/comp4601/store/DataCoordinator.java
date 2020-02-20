@@ -71,7 +71,7 @@ public final class DataCoordinator implements Storable<WebDocument>, Searchable<
 		pageRanks.forEach((id, score) -> {
 			if (!queue.isEmpty()) {
 				WebDocument document = queue.remove();
-				document.setPageRankScore(score);
+				document.setPageRankScore(pageRanks.get(document.getId()));
 	
 				documentsDatabase.upsert(document);
 			}
