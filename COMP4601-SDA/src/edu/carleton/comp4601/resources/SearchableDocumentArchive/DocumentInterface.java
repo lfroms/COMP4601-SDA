@@ -75,4 +75,27 @@ final class DocumentInterface {
 	public static void delete(Integer id) {
 		coordinator.delete(id);
 	}
+
+	public static String getSingleXML(Integer id) {
+		Optional<WebDocument> document = coordinator.find(id);
+		
+		if (document.isEmpty()) {
+			return "";
+		}
+		
+		WebDocument unwrappedDocument = document.get();
+		
+		String output = "";
+		
+		output += "<document>";
+		
+		output += "<id>" + unwrappedDocument.getId() + "</id>";
+		output += "<name>" + "some name" + "</name>";
+		output += "<url>" + unwrappedDocument.getURL().toString() + "</url>";
+		output += "<content>" + unwrappedDocument.getContent() + "</content>";
+		
+		output += "</document>";
+		
+		return output;
+	}
 }

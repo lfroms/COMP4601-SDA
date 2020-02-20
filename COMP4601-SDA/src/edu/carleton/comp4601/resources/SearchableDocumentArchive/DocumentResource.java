@@ -18,6 +18,12 @@ public class DocumentResource {
 	}
 	
 	@GET
+	@Produces(MediaType.APPLICATION_XML)
+	public String getXML(@PathParam(PARAM_NAME) String id) {
+		return DocumentInterface.getSingleXML(mapId(id));
+	}
+	
+	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getJSON(@PathParam(PARAM_NAME) String id) {
 		return DocumentInterface.getSingleJSON(mapId(id));
