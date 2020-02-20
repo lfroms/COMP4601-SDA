@@ -68,9 +68,9 @@ final class Crawler extends WebCrawler {
 		ByteArrayInputStream dataStream = new ByteArrayInputStream(contentData);
 		TikaHelper tikaHelper = new TikaHelper(dataStream);
 
-
 		WebDocument vertex = new BinaryDocument(
 				webUrl.getDocid(),
+				webUrl.getPath(),
 				webUrl,
 				getCurrentUnixTimestamp(),
 				0.0,

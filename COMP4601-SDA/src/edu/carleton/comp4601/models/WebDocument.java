@@ -6,13 +6,15 @@ import edu.uci.ics.crawler4j.url.WebURL;
 
 public abstract class WebDocument implements Identifiable, Locatable, JSONSerializable {
 	private final Integer id;
+	private final String title;
 	private final String typeName;
 	private final WebURL url;
 	private Integer lastCrawledTime;
 	private Double pageRankScore;
 		
-	public WebDocument(Integer id, WebURL url, Integer lastCrawledTime, Double pageRankScore) {
+	public WebDocument(Integer id, String title, WebURL url, Integer lastCrawledTime, Double pageRankScore) {
 		this.id = id;
+		this.title = title;
 		this.typeName = getTypeName();
 		this.url = url;
 		this.lastCrawledTime = lastCrawledTime;
@@ -28,6 +30,7 @@ public abstract class WebDocument implements Identifiable, Locatable, JSONSerial
 		newUrl.setParentDocid(object.getInt(Fields.PARENT_ID));
 		
 		this.id = object.getInt(Fields.ID);
+		this.title = object.getString(Fields.TITLE);
 		this.typeName = getTypeName();
 		this.url = newUrl;
 		this.lastCrawledTime = object.getInt(Fields.LAST_CRAWLED_TIME);
@@ -40,6 +43,7 @@ public abstract class WebDocument implements Identifiable, Locatable, JSONSerial
 		object
 			.put(Fields.ID, id)
 			.put(Fields.PARENT_ID, getParentId())
+			.put(Fields.TITLE, title)
 			.put(TYPE_FIELD, typeName)
 			.put(Fields.URL, url)
 			.put(Fields.LAST_CRAWLED_TIME, lastCrawledTime)
@@ -56,6 +60,10 @@ public abstract class WebDocument implements Identifiable, Locatable, JSONSerial
 	
 	public Integer getParentId() {
 		return url.getParentDocid();
+	}
+	
+	public String getTitle() {
+		return title;
 	}
 
 	public WebURL getURL() {
@@ -84,6 +92,7 @@ public abstract class WebDocument implements Identifiable, Locatable, JSONSerial
 	
 	private static class Fields {
 		public static final String ID = "id";
+		public static final String TITLE = "title";
 		public static final String PARENT_ID = "parent_id";
 		public static final String URL = "url";
 		public static final String LAST_CRAWLED_TIME = "last_crawled_time";

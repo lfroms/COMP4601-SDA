@@ -21,7 +21,7 @@ final class DocumentsInterface {
 			
 			singleJSON
 				.put("id", doc.getId())
-				.put("name", "some name")
+				.put("name", doc.getTitle())
 				.put("url", doc.getURL())
 				.put("content", doc.getContent());
 			
@@ -50,7 +50,7 @@ final class DocumentsInterface {
 			
 			output += "<tr>";
 			output += "<td>name</td>";
-			output += "<td>" + "some name" + "</td>";
+			output += "<td>" + doc.getTitle() + "</td>";
 			output += "</tr>";
 			
 			output += "<tr>";
@@ -80,7 +80,7 @@ final class DocumentsInterface {
 			output += "<document>";
 			
 			output += "<id>" + doc.getId() + "</id>";
-			output += "<name>" + "some name" + "</name>";
+			output += "<name>" + doc.getTitle() + "</name>";
 			output += "<url>" + doc.getURL().toString() + "</url>";
 			output += "<content>" + doc.getContent() + "</content>";
 			

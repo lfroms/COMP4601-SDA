@@ -11,6 +11,7 @@ public final class BinaryDocument extends WebDocument {
 
 	public BinaryDocument(
 			Integer id,
+			String title,
 			WebURL url,
 			Integer lastCrawledTime,
 			Double pageRankScore,
@@ -18,7 +19,7 @@ public final class BinaryDocument extends WebDocument {
 			Integer sizeInBytes,
 			String inferredContent) {
 
-		super(id, url, lastCrawledTime, pageRankScore);
+		super(id, title, url, lastCrawledTime, pageRankScore);
 		
 		this.mimeType = mimeType;
 		this.sizeInBytes = sizeInBytes;

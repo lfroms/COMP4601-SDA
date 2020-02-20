@@ -12,7 +12,6 @@ import org.jsoup.select.Elements;
 import edu.uci.ics.crawler4j.url.WebURL;
 
 public final class HypertextDocument extends WebDocument {
-	private String title;
 	private List<String> links;
 	private List<ImageDescriptor> images;
 	private List<String> paragraphs;
@@ -25,11 +24,10 @@ public final class HypertextDocument extends WebDocument {
 			Double pageRankScore,
 			String htmlParseDataText) {
 
-		super(id, url, lastCrawledTime, pageRankScore);
+		super(id, getTitleFromDocument(Jsoup.parse(htmlParseDataText)), url, lastCrawledTime, pageRankScore);
 
 		Document doc = Jsoup.parse(htmlParseDataText);
 		
-		this.title = getTitleFromDocument(doc);
 		this.links = getLinksFromDocument(doc);
 		this.images = getImagesFromDocument(doc);
 		this.paragraphs = getParagraphsFromDocument(doc);
@@ -66,7 +64,6 @@ public final class HypertextDocument extends WebDocument {
 		});
 
 		object
-			.put(Fields.TITLE, title)
 			.put(Fields.LINKS, links)
 			.put(Fields.IMAGES, imagesArray)
 			.put(Fields.PARAGRAPHS, paragraphs)
@@ -137,7 +134,6 @@ public final class HypertextDocument extends WebDocument {
 	// FIELD NAMES ======================================================================
 
 	private static class Fields {
-		public static final String TITLE = "title";
 		public static final String LINKS = "links";
 		public static final String IMAGES = "images";
 		public static final String PARAGRAPHS = "paragraphs";

@@ -49,6 +49,7 @@ final class SearchInterface {
 		output += "<table>";
 		output += "<tr>";
 		output += "<th>ID</th>";
+		output += "<th>Title</th>";
 		output += "<th>URL</th>";
 		output += "<th>Score</th>";
 		output += "</tr>";
@@ -77,6 +78,7 @@ final class SearchInterface {
 		
 		output += "<tr>";
 		output += "<td>" + doc.getId() + "</td>";
+		output += "<td>" + doc.getName() + "</td>";
 		output += "<td><a href=\"" + doc.getUrl() + "\">" + doc.getUrl() + "</td>";
 		output += "<td>" + doc.getScore() + "</td>";
 		output += "</tr>";
@@ -89,6 +91,7 @@ final class SearchInterface {
 		
 		output
 			.put("id", doc.getId())
+			.put("name", doc.getName())
 			.put("url", doc.getUrl())
 			.put("score", doc.getScore());
 		

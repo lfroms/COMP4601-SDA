@@ -56,8 +56,7 @@ public final class LuceneMapper implements DocumentMapper<WebDocument, Document>
 		edu.carleton.comp4601.dao.Document output = new edu.carleton.comp4601.dao.Document();
 		
 		output.setId(Integer.valueOf(input.get(IndexDocumentFields.ID)));
-		// TODO: Set a name.
-		output.setName("test doc name");
+		output.setName(input.get(IndexDocumentFields.TITLE));
 		output.setScore(scoreDoc.score);
 		output.setContent(input.get(IndexDocumentFields.CONTENT));
 		output.setUrl(input.get(IndexDocumentFields.URL));
@@ -71,13 +70,12 @@ public final class LuceneMapper implements DocumentMapper<WebDocument, Document>
 		Document output = new Document();
 		
 		output.add(new StoredField(IndexDocumentFields.ID, input.getId()));
-		
-		// TODO: Give a proper name
-		output.add(new StoredField(IndexDocumentFields.INDEXED_BY, "AppName"));
-		
+		output.add(new StoredField(IndexDocumentFields.TITLE, input.getTitle()));
+		output.add(new StoredField(IndexDocumentFields.INDEXED_BY, "Lukas & Britta"));		
 		output.add(new StoredField(IndexDocumentFields.URL, input.getURL().toString()));
 		output.add(new StoredField(IndexDocumentFields.DATE, input.getLastCrawledTime()));
 		
 		return output;
 	}
+
 }

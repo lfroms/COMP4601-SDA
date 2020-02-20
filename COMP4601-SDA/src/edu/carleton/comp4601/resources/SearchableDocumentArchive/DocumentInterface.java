@@ -23,7 +23,7 @@ final class DocumentInterface {
 		
 		output
 			.put("id", unwrappedDocument.getId())
-			.put("name", "some name")
+			.put("name", unwrappedDocument.getTitle())
 			.put("url", unwrappedDocument.getURL())
 			.put("content", unwrappedDocument.getContent());
 		
@@ -54,7 +54,7 @@ final class DocumentInterface {
 		
 		output += "<tr>";
 		output += "<td>name</td>";
-		output += "<td>" + "some name" + "</td>";
+		output += "<td>" + unwrappedDocument.getTitle() + "</td>";
 		output += "</tr>";
 		
 		output += "<tr>";
@@ -90,7 +90,7 @@ final class DocumentInterface {
 		output += "<document>";
 		
 		output += "<id>" + unwrappedDocument.getId() + "</id>";
-		output += "<name>" + "some name" + "</name>";
+		output += "<name>" + unwrappedDocument.getTitle() + "</name>";
 		output += "<url>" + unwrappedDocument.getURL().toString() + "</url>";
 		output += "<content>" + unwrappedDocument.getContent() + "</content>";
 		
