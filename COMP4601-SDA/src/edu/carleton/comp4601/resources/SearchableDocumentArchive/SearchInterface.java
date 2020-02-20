@@ -1,10 +1,14 @@
 package edu.carleton.comp4601.resources.SearchableDocumentArchive;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import edu.carleton.comp4601.dao.Document;
 import edu.carleton.comp4601.dao.DocumentCollection;
+import edu.carleton.comp4601.helpers.DocumentScoreComparator;
 import edu.carleton.comp4601.store.DataCoordinator;
 
 final class SearchInterface {
@@ -54,7 +58,10 @@ final class SearchInterface {
 		output += "<th>Score</th>";
 		output += "</tr>";
 		
-		for (Document doc : collection.getDocuments()) {
+		ArrayList<Document> allDocuments = collection.getDocuments();
+		Collections.sort(allDocuments, new DocumentScoreComparator());
+		
+		for (Document doc : allDocuments) {
 			output += convertDocumentToHTML(doc);
 		}
 		
@@ -66,7 +73,10 @@ final class SearchInterface {
 	private final static String convertCollectionToJSON(DocumentCollection collection) {
 		JSONArray output = new JSONArray();
 		
-		for (Document doc : collection.getDocuments()) {
+		ArrayList<Document> allDocuments = collection.getDocuments();
+		Collections.sort(allDocuments, new DocumentScoreComparator());
+		
+		for (Document doc : allDocuments) {
 			output.put(convertDocumentToJSON(doc));
 		}
 		

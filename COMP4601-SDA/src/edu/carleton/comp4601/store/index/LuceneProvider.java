@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
@@ -23,6 +24,7 @@ import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.store.FSDirectory;
 
 import edu.carleton.comp4601.dao.DocumentCollection;
+import edu.carleton.comp4601.helpers.DocumentScoreComparator;
 import edu.carleton.comp4601.models.Identifiable;
 import edu.carleton.comp4601.store.DocumentMapper;
 import edu.carleton.comp4601.store.MappableProvider;
@@ -155,6 +157,8 @@ public final class LuceneProvider<DocumentType extends Identifiable> extends Map
 				System.err.println("Unable to deserialize a Lucene document. Skipping...");
 			}
 		}
+		
+		Collections.sort(documents, new DocumentScoreComparator());
 		
 		return documents;
 	}
