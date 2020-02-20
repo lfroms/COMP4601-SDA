@@ -15,12 +15,12 @@ import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.index.Term;
+import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.store.FSDirectory;
-import org.apache.lucene.queryparser.classic.QueryParser;
 
 import edu.carleton.comp4601.dao.DocumentCollection;
 import edu.carleton.comp4601.models.Identifiable;
@@ -102,7 +102,7 @@ public final class LuceneProvider<DocumentType extends Identifiable> extends Map
 		DocumentCollection output = new DocumentCollection();
 		
 		try {
-			TopDocs topDocs = searchDocuments(terms, searcher);
+			TopDocs topDocs = searchByContent(terms, searcher);
 			
 			ArrayList<edu.carleton.comp4601.dao.Document> documents = deserializeScoreDocs(topDocs.scoreDocs);
 			output.setDocuments(documents);
@@ -116,7 +116,7 @@ public final class LuceneProvider<DocumentType extends Identifiable> extends Map
 	
 	// PRIVATE HELPERS ==================================================================
 	
-	private static TopDocs searchDocuments(String terms, IndexSearcher searcher) throws Exception {
+	private static TopDocs searchByContent(String terms, IndexSearcher searcher) throws Exception {
 		QueryParser qp = new QueryParser(IndexDocumentFields.CONTENT, new StandardAnalyzer());
         Query query = qp.parse(terms);
         TopDocs hits = searcher.search(query, 100);

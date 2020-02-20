@@ -3,7 +3,8 @@ package edu.carleton.comp4601.store.index;
 import java.lang.reflect.InvocationTargetException;
 
 import org.apache.lucene.document.Document;
-import org.apache.lucene.document.StoredField;
+import org.apache.lucene.document.Field;
+import org.apache.lucene.document.StringField;
 
 import edu.carleton.comp4601.models.HypertextDocument;
 import edu.carleton.comp4601.store.DocumentMapper;
@@ -14,8 +15,8 @@ final class HypertextDocumentLuceneMapper implements DocumentMapper<HypertextDoc
 	public Document serialize(HypertextDocument input) {
 		Document output = new Document();
 		
-		output.add(new StoredField(IndexDocumentFields.CONTENT, input.getContent()));
-		output.add(new StoredField(IndexDocumentFields.TYPE, "text/html"));
+		output.add(new StringField(IndexDocumentFields.CONTENT, input.getContent(), Field.Store.YES));
+		output.add(new StringField(IndexDocumentFields.TYPE, "text/html", Field.Store.YES));
 		
 		return output;
 	}

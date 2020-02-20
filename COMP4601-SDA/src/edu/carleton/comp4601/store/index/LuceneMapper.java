@@ -3,7 +3,8 @@ package edu.carleton.comp4601.store.index;
 import java.lang.reflect.InvocationTargetException;
 
 import org.apache.lucene.document.Document;
-import org.apache.lucene.document.StoredField;
+import org.apache.lucene.document.Field;
+import org.apache.lucene.document.StringField;
 import org.apache.lucene.search.ScoreDoc;
 
 import edu.carleton.comp4601.models.BinaryDocument;
@@ -69,11 +70,11 @@ public final class LuceneMapper implements DocumentMapper<WebDocument, Document>
 	public static Document createBaseDocument(WebDocument input) {
 		Document output = new Document();
 		
-		output.add(new StoredField(IndexDocumentFields.ID, input.getId()));
-		output.add(new StoredField(IndexDocumentFields.TITLE, input.getTitle()));
-		output.add(new StoredField(IndexDocumentFields.INDEXED_BY, "Lukas & Britta"));		
-		output.add(new StoredField(IndexDocumentFields.URL, input.getURL().toString()));
-		output.add(new StoredField(IndexDocumentFields.DATE, input.getLastCrawledTime()));
+		output.add(new StringField(IndexDocumentFields.ID, input.getId().toString(), Field.Store.YES));
+		output.add(new StringField(IndexDocumentFields.TITLE, input.getTitle(), Field.Store.YES));
+		output.add(new StringField(IndexDocumentFields.INDEXED_BY, "Lukas & Britta", Field.Store.YES));		
+		output.add(new StringField(IndexDocumentFields.URL, input.getURL().toString(), Field.Store.YES));
+		output.add(new StringField(IndexDocumentFields.DATE, input.getLastCrawledTime().toString(), Field.Store.YES));
 		
 		return output;
 	}
