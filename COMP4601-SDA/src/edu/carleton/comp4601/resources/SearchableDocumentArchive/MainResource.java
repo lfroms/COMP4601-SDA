@@ -5,6 +5,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import edu.carleton.comp4601.utility.SearchServiceManager;
+
 @Path("sda")
 public class MainResource {
 	
@@ -27,7 +29,7 @@ public class MainResource {
 	@Path("list")
 	@Produces(MediaType.TEXT_HTML)
 	public String list() {
-		return "";
+		return String.join("<br />", SearchServiceManager.getInstance().list());
 	}
 	
 	@GET
