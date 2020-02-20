@@ -68,6 +68,27 @@ final class DocumentsInterface {
 		
 		output += "</body></html>";
 
+		return output;
+	}
+	
+	public final static String getMultiXML() {
+		ArrayList<WebDocument> allDocuments = coordinator.getAll();
+
+		String output = "<documents>";
+		
+		for (WebDocument doc : allDocuments) {
+			output += "<document>";
+			
+			output += "<id>" + doc.getId() + "</id>";
+			output += "<name>" + "some name" + "</name>";
+			output += "<url>" + doc.getURL().toString() + "</url>";
+			output += "<content>" + doc.getContent() + "</content>";
+			
+			output += "</document>";
+		}
+		
+		output += "</documents>";
+
 		return output;		
 	}
 

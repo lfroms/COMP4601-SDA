@@ -23,8 +23,7 @@ public class DocumentsResource {
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	public String getXML() {
-		// TODO Return XML
-		return "";
+		return DocumentsInterface.getMultiXML();
 	}
 	
 }
