@@ -5,7 +5,6 @@ import java.io.IOException;
 
 import org.apache.tika.Tika;
 import org.apache.tika.metadata.Metadata;
-import org.apache.tika.metadata.TikaCoreProperties;
 import org.apache.tika.parser.AutoDetectParser;
 import org.apache.tika.sax.BodyContentHandler;
 
