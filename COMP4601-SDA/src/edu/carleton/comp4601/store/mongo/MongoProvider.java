@@ -1,6 +1,5 @@
 package edu.carleton.comp4601.store.mongo;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.function.Supplier;
@@ -18,9 +17,7 @@ import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.ReplaceOptions;
 
 import edu.carleton.comp4601.models.Identifiable;
-import edu.carleton.comp4601.models.WebDocument;
 import edu.carleton.comp4601.store.DocumentMapper;
-import edu.carleton.comp4601.store.List;
 import edu.carleton.comp4601.store.MappableProvider;
 import edu.carleton.comp4601.store.Storable;
 
