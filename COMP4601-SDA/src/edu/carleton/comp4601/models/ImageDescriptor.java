@@ -26,6 +26,16 @@ final class ImageDescriptor {
 
 		return object;
 	}
+	
+	// GETTERS ==========================================================================
+	
+	public String getUrl() {
+		return url;
+	}
+	
+	public String getAltText() {
+		return altText;
+	}
 
 	// FIELD NAMES ======================================================================
 	

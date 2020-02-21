@@ -5,6 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.StringField;
+import org.apache.lucene.document.TextField;
 
 import edu.carleton.comp4601.models.HypertextDocument;
 import edu.carleton.comp4601.store.DocumentMapper;
@@ -16,6 +17,7 @@ final class HypertextDocumentLuceneMapper implements DocumentMapper<HypertextDoc
 		Document output = new Document();
 		
 		output.add(new StringField(IndexDocumentFields.TYPE, "text/html", Field.Store.YES));
+		output.add(new TextField(IndexDocumentFields.IMAGE_ALT_TEXTS, input.getJoinedImageAltText(), Field.Store.YES));
 		
 		return output;
 	}

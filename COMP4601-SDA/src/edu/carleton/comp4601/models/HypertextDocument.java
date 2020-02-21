@@ -130,6 +130,16 @@ public final class HypertextDocument extends WebDocument {
 	public String getContent() {		
 		return String.join(" ", headings) + String.join(" ", paragraphs);
 	}
+	
+	public String getJoinedImageAltText() {
+		ArrayList<String> output = new ArrayList<>();
+		
+		images.forEach(image -> {
+			output.add(image.getAltText());
+		});
+		
+		return String.join(" ", output);
+	}
 
 	// FIELD NAMES ======================================================================
 

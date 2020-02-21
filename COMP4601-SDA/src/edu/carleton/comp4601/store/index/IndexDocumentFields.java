@@ -7,5 +7,6 @@ public final class IndexDocumentFields {
 	public final static String URL = "url";
 	public final static String DATE = "date";
 	public final static String CONTENT = "content";
+	public final static String IMAGE_ALT_TEXTS = "image_alt_texts";
 	public final static String TYPE = "type";
 }
