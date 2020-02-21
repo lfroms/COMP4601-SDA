@@ -95,4 +95,8 @@ final class DocumentsInterface {
 	public static void delete(Integer id) {
 		coordinator.delete(id);
 	}
+
+	public static boolean deleteByQuery(String query) {
+		return coordinator.deleteByQuery(query);
+	}
 }

@@ -81,6 +81,20 @@ public final class DataCoordinator implements Storable<WebDocument>, Searchable<
 		graphProvider.delete(id);
 	}
 	
+	public boolean deleteByQuery(String query) {
+		ArrayList<Document> results = luceneIndex.search(query).getDocuments();
+		
+		if (results.size() == 0) {
+			return false;
+		}
+		
+		results.forEach(result -> {
+			delete(result.getId());
+		});
+		
+		return true;
+	}
+	
 	public void processAndStoreData() {
 		System.out.println("NOTICE: Processing PageRank for graph...");
 		Map<Integer, Double> pageRanks = graphProvider.getRanksForAllObjects();
