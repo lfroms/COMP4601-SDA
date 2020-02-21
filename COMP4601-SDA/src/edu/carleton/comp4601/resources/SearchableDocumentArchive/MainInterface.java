@@ -18,25 +18,21 @@ final class MainInterface {
 
 		String output = "";
 		
+		output += "<table class=\"w3-table-all w3-centered\">";
+		output += "<tr>";
+		output += "<th>URL</th>";
+		output += "<th>PageRank Score</th>";
+		output += "</tr>";
+		
 		for (WebDocument doc : allDocuments) {
-			output += "<table>";
 			output += "<tr>";
-			output += "<th>URL</th>";
-			output += "<th>PageRank Score</th>";
-			output += "</tr>";
-			
-			output += "<tr>";
-			output += "<td>url</td>";
 			output += "<td><a href=\"" + doc.getURL().toString() + "\">" + doc.getURL().toString() + "</a></td>";
-			output += "</tr>";
-			
-			output += "<tr>";
-			output += "<td>content</td>";
 			output += "<td>" + doc.getPageRankScore() + "</td>";
-			output += "</tr>";
-			
-			output += "</table>";
+			output += "</tr>";	
 		}
+		
+		output += "</table>";
+
 		
 		return HTMLFrameGenerator.wrapInHTMLFrame("PageRank", output);
 	}

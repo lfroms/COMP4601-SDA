@@ -14,7 +14,7 @@ public final class HTMLFrameGenerator {
 		output += "</title>";
 		output += "</head>";
 		
-		output += "<body>";
+		output += "<body class=\"w3-container\">";
 		
 		output += htmlContent;
 		
