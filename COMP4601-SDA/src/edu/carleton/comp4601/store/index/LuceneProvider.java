@@ -58,6 +58,8 @@ public final class LuceneProvider<DocumentType extends Identifiable> extends Map
 	public void upsert(DocumentType input) {
 		Document document = mapperConstructor.get().serialize(input);
 		
+		// NOTE: Does not actually "up"sert, just adds.
+		
 		try {
 			writer.addDocument(document);
 			writer.commit();
