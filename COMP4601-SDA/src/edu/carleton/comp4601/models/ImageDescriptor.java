@@ -14,7 +14,7 @@ final class ImageDescriptor {
 	// JSON SERIALIZATION ===============================================================
 
 	public ImageDescriptor(JSONObject object) {
-		this(object.getString(Fields.URL), object.getString(Fields.ALT_TEXT));
+		this(object.optString(Fields.URL, ""), object.optString(Fields.ALT_TEXT, ""));
 	}
 
 	public JSONObject toJSON() {

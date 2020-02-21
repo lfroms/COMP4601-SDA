@@ -17,7 +17,7 @@ import edu.uci.ics.crawler4j.url.WebURL;
 final class Crawler extends WebCrawler {
 	private final static DataCoordinator dataCoordinator = DataCoordinator.getInstance();
 	
-	private final static Pattern FILTERS = Pattern.compile(".*(\\.(css|js|mp3|mp4|zip|gz))$");
+	private final static Pattern FILTERS = Pattern.compile(".*(\\.(css|js|mp3|mp4|zip|gz|oembed|))$");
 
 	private final String[] supportedUrls = {
 			"https://sikaman.dyndns.org",
