@@ -73,7 +73,7 @@ final class Crawler extends WebCrawler {
 
 		WebDocument vertex = new BinaryDocument(
 				webUrl.getDocid(),
-				FilenameUtils.getPath(webUrl.getPath()),
+				FilenameUtils.getName(webUrl.getPath()),
 				webUrl,
 				getCurrentUnixTimestamp(),
 				0.0,

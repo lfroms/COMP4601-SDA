@@ -36,14 +36,14 @@ final class DocumentsInterface {
 		ArrayList<WebDocument> allDocuments = coordinator.getAll();
 
 		String output = "";
+		output += "<table class=\"w3-table-all w3-centered\">";
+		output += "<tr>";
+		output += "<th>Column</th>";
+		output += "<th>Value</th>";
+		output += "</tr>";
+
 		
 		for (WebDocument doc : allDocuments) {
-			output += "<table>";
-			output += "<tr>";
-			output += "<th>Column</th>";
-			output += "<th>Value</th>";
-			output += "</tr>";
-	
 			output += "<tr>";
 			output += "<td>id</td>";
 			output += "<td>" + doc.getId() + "</td>";
@@ -63,9 +63,10 @@ final class DocumentsInterface {
 			output += "<td>content</td>";
 			output += "<td>" + doc.getContent() + "</td>";
 			output += "</tr>";
-			
-			output += "</table>";
 		}
+		
+		output += "</table>";
+
 
 		return HTMLFrameGenerator.wrapInHTMLFrame("All Documents", output);
 	}

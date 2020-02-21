@@ -42,7 +42,7 @@ final class DocumentInterface {
 		
 		String output = "";
 		
-		output += "<table>";
+		output += "<table class=\"w3-table-all w3-centered\">";
 		output += "<tr>";
 		output += "<th>Column</th>";
 		output += "<th>Value</th>";

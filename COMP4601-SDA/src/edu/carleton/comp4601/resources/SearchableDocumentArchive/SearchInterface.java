@@ -52,8 +52,14 @@ final class SearchInterface {
 	// PRIVATE HELPERS ==================================================================
 	
 	private final static String convertCollectionToHTML(DocumentCollection collection) {
+		ArrayList<Document> allDocuments = collection.getDocuments();
+		
+		if (allDocuments.size() == 0) {
+			return "<h1>No results</h1>";
+		}
+		
 		String output = "";
-		output += "<table>";
+		output += "<table class=\"w3-table-all w3-centered\">";
 		output += "<tr>";
 		output += "<th>ID</th>";
 		output += "<th>Title</th>";
@@ -61,7 +67,6 @@ final class SearchInterface {
 		output += "<th>Score</th>";
 		output += "</tr>";
 		
-		ArrayList<Document> allDocuments = collection.getDocuments();
 		Collections.sort(allDocuments, new DocumentScoreComparator());
 		
 		for (Document doc : allDocuments) {
