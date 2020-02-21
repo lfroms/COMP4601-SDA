@@ -15,7 +15,8 @@ public class MainResource {
 	@GET
 	@Produces(MediaType.TEXT_HTML)
 	public String displayLanding() {
-		return "<h1>COMP4601 Searchable Document Archive: Lukas Romsicki & Britta Evans-Fenton</h1>";
+		String contentHtml = "<h1>COMP4601 Searchable Document Archive: Lukas Romsicki & Britta Evans-Fenton</h1>";
+		return HTMLFrameGenerator.wrapInHTMLFrame("SDA", contentHtml);
 	}
 	
 	// SERVICES =========================================================================
@@ -26,10 +27,15 @@ public class MainResource {
 	public Response reset() {
 		try {
 			MainInterface.resetAll();
-			return Response.ok(HTMLFrameGenerator.wrapInHTMLFrame("Reset", "<strong>Successfully reset all documents.</strong>")).build();
+
+			return Response.ok(
+					HTMLFrameGenerator.wrapInHTMLFrame("Reset", "<strong>Successfully reset all documents.</strong>")
+				).build();
 			
 		} catch (Exception e) {
-			return Response.notModified(HTMLFrameGenerator.wrapInHTMLFrame("Reset Failed", "<strong>Failed to reset documents.</strong>")).build();
+			return Response.notModified(
+					HTMLFrameGenerator.wrapInHTMLFrame("Reset Failed", "<strong>Failed to reset documents.</strong>")
+				).build();
 		}	
 	}
 	
@@ -37,26 +43,30 @@ public class MainResource {
 	@Path("list")
 	@Produces(MediaType.TEXT_HTML)
 	public String list() {
-		return String.join("<br />", SearchServiceManager.getInstance().list());
+		String listHtml = String.join("<br />", SearchServiceManager.getInstance().list());
+		return HTMLFrameGenerator.wrapInHTMLFrame("Available Services", listHtml);
 	}
 	
 	@GET
 	@Path("pagerank")
 	@Produces(MediaType.TEXT_HTML)
 	public String pageRank() {
-		return "";
+		return MainInterface.getPageRankList();
 	}
 	
 	@GET
 	@Path("boost")
-	public void boost() {
+	public Response boost() {
+		MainInterface.reIndexWithBoost();
 		
+		return Response.ok().build();
 	}
 	
 	@GET
 	@Path("noboost")
-	public void noBoost() {
+	public Response noBoost() {
+		MainInterface.reIndexRemovingBoost();
 		
+		return Response.ok().build();
 	}
-
 }
