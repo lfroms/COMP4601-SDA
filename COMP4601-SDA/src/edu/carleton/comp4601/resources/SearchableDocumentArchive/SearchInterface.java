@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import edu.carleton.comp4601.dao.Document;
 import edu.carleton.comp4601.dao.DocumentCollection;
 import edu.carleton.comp4601.helpers.DocumentScoreComparator;
+import edu.carleton.comp4601.helpers.HTMLFrameGenerator;
 import edu.carleton.comp4601.store.DataCoordinator;
 
 final class SearchInterface {
@@ -25,7 +26,8 @@ final class SearchInterface {
 	public final static String searchLocalHTML(String terms) {
 		DocumentCollection collection = coordinator.search(terms);
 		
-		return convertCollectionToHTML(collection);
+		String html = convertCollectionToHTML(collection);
+		return HTMLFrameGenerator.wrapInHTMLFrame("Results for: " + terms, html);
 	}
 
 	public final static String searchLocalJSON(String terms) {
@@ -37,7 +39,8 @@ final class SearchInterface {
 	public final static String searchDistributedHTML(String terms) {
 		DocumentCollection collection = coordinator.searchDistributed(terms);
 		
-		return convertCollectionToHTML(collection);
+		String html = convertCollectionToHTML(collection);
+		return HTMLFrameGenerator.wrapInHTMLFrame("Results for: " + terms, html);
 	}
 
 	public final static String searchDistributedJSON(String terms) {
@@ -49,7 +52,7 @@ final class SearchInterface {
 	// PRIVATE HELPERS ==================================================================
 	
 	private final static String convertCollectionToHTML(DocumentCollection collection) {
-		String output = "<html><body>";
+		String output = "";
 		output += "<table>";
 		output += "<tr>";
 		output += "<th>ID</th>";
@@ -65,7 +68,7 @@ final class SearchInterface {
 			output += convertDocumentToHTML(doc);
 		}
 		
-		output += "</table></body></html>";
+		output += "</table>";
 		
 		return output;
 	}

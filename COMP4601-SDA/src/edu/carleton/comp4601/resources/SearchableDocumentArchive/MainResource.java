@@ -4,7 +4,9 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
+import edu.carleton.comp4601.helpers.HTMLFrameGenerator;
 import edu.carleton.comp4601.utility.SearchServiceManager;
 
 @Path("sda")
@@ -21,8 +23,14 @@ public class MainResource {
 	@GET
 	@Path("reset")
 	@Produces(MediaType.TEXT_HTML)
-	public String reset() {
-		return "";
+	public Response reset() {
+		try {
+			MainInterface.resetAll();
+			return Response.ok(HTMLFrameGenerator.wrapInHTMLFrame("Reset", "<strong>Successfully reset all documents.</strong>")).build();
+			
+		} catch (Exception e) {
+			return Response.notModified(HTMLFrameGenerator.wrapInHTMLFrame("Reset Failed", "<strong>Failed to reset documents.</strong>")).build();
+		}	
 	}
 	
 	@GET

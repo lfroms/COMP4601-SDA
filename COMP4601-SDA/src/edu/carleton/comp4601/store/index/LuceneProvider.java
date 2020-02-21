@@ -162,4 +162,16 @@ public final class LuceneProvider<DocumentType extends Identifiable> extends Map
 		
 		return documents;
 	}
+
+	@Override
+	public void reset() {
+		try {
+			writer.deleteAll();
+			writer.commit();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.err.println("Failed to clear Lucene index.");
+		}
+	}
 }

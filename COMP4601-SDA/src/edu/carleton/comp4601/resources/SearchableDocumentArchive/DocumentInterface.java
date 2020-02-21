@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.json.JSONObject;
 
+import edu.carleton.comp4601.helpers.HTMLFrameGenerator;
 import edu.carleton.comp4601.models.WebDocument;
 import edu.carleton.comp4601.store.DataCoordinator;
 
@@ -69,7 +70,7 @@ final class DocumentInterface {
 		
 		output += "</table>";
 
-		return output;		
+		return HTMLFrameGenerator.wrapInHTMLFrame(unwrappedDocument.getTitle(), output);		
 	}
 
 	public static void delete(Integer id) {

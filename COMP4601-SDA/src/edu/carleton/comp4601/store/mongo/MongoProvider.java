@@ -88,4 +88,9 @@ public final class MongoProvider<DocumentType extends Identifiable> extends Mapp
 		Bson filter = Filters.eq(SYSTEM_ID_FIELD, id);
 		collection.deleteOne(filter);
 	}
+
+	@Override
+	public void reset() {
+		collection.drop();
+	}
 }

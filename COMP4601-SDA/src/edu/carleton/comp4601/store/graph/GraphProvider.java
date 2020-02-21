@@ -68,7 +68,7 @@ public final class GraphProvider<DocumentType extends Identifiable & Locatable> 
 	
 	public final Boolean setDataUsingGraphViz(String serializedData) {
 		try {
-			graph = new DirectedMultigraph<>(DefaultEdge.class);
+			reset();
 			mapperConstructor.get().getImporter().importGraph(graph, new StringReader(serializedData));
 			return true;
 			
@@ -93,5 +93,10 @@ public final class GraphProvider<DocumentType extends Identifiable & Locatable> 
 		} catch(NoSuchElementException e) {
 			return false;
 		}
+	}
+
+	@Override
+	public void reset() {
+		graph = new DirectedMultigraph<>(DefaultEdge.class);
 	}
 }

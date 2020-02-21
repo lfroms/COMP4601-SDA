@@ -99,6 +99,14 @@ public final class DataCoordinator implements Storable<WebDocument>, Searchable<
 		return true;
 	}
 	
+	@Override
+	public void reset() {
+		graphProvider.reset();
+		luceneIndex.reset();
+		documentsDatabase.reset();
+		graphsDatabase.reset();
+	}
+	
 	public void loadPersistedData() {
 		loadGraphFromDatabase();
 	}

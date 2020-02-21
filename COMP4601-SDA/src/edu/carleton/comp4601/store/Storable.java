@@ -25,4 +25,9 @@ public interface Storable<DataType extends Identifiable> {
 	 */
 	public void delete(Integer id);
 	
+	/**
+	 * Resets all data.
+	 */
+	public void reset();
+	
 }

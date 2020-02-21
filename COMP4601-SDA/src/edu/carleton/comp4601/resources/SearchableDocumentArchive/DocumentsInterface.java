@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import edu.carleton.comp4601.helpers.HTMLFrameGenerator;
 import edu.carleton.comp4601.models.WebDocument;
 import edu.carleton.comp4601.store.DataCoordinator;
 
@@ -34,7 +35,7 @@ final class DocumentsInterface {
 	public final static String getMultiHTML() {
 		ArrayList<WebDocument> allDocuments = coordinator.getAll();
 
-		String output = "<html><body>";
+		String output = "";
 		
 		for (WebDocument doc : allDocuments) {
 			output += "<table>";
@@ -65,10 +66,8 @@ final class DocumentsInterface {
 			
 			output += "</table>";
 		}
-		
-		output += "</body></html>";
 
-		return output;
+		return HTMLFrameGenerator.wrapInHTMLFrame("All Documents", output);
 	}
 	
 	public final static String getMultiXML() {
