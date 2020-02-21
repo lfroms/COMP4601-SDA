@@ -25,7 +25,11 @@ final class CrawlerController {
 
         controller.addSeed("https://sikaman.dyndns.org:8443/WebSite/rest/site/courses/4601/handouts/");
         controller.addSeed("https://sikaman.dyndns.org:8443/WebSite/rest/site/courses/4601/resources/");
+        controller.addSeed("https://lowpolycrafts.nz");
 
+        System.out.println("NOTICE: Loading graph data into memory from database.");
+        dataCoordinator.loadPersistedData();
+        
         CrawlController.WebCrawlerFactory<Crawler> factory = Crawler::new;
         controller.start(factory, NUM_CRAWLERS);
         

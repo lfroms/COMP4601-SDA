@@ -19,8 +19,9 @@ final class Crawler extends WebCrawler {
 	
 	private final static Pattern FILTERS = Pattern.compile(".*(\\.(css|js|mp3|mp4|zip|gz))$");
 
-	private String[] supportedUrls = {
-			"https://sikaman.dyndns.org"
+	private final String[] supportedUrls = {
+			"https://sikaman.dyndns.org",
+			"https://lowpolycrafts.nz"
 	};
 	
 	@Override

@@ -75,7 +75,7 @@ public final class GraphMapper extends ApplicationSpecificMapper implements Docu
 			Class<? extends WebDocument> Clazz = classForTypeName(typeName);
 
 			try {
-				return Clazz.getDeclaredConstructor().newInstance(jsonRepresentation);
+				return Clazz.getDeclaredConstructor(JSONObject.class).newInstance(jsonRepresentation);
 			} catch (Exception e) {
 				e.printStackTrace();
 				return null;

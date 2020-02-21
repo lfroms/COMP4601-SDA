@@ -38,6 +38,10 @@ public final class DataCoordinator implements Storable<WebDocument>, Searchable<
 		return singleInstance;
 	}
 	
+	// CONSTANTS ========================================================================
+	
+	private static final Integer GRAPH_DB_ID = 1;
+	
 	// STORABLE INSTANCES ===============================================================
 	
 	private static MongoProvider<WebDocument> documentsDatabase = 
@@ -93,6 +97,10 @@ public final class DataCoordinator implements Storable<WebDocument>, Searchable<
 		});
 		
 		return true;
+	}
+	
+	public void loadPersistedData() {
+		loadGraphFromDatabase();
 	}
 	
 	public void processAndStoreData() {
@@ -161,13 +169,25 @@ public final class DataCoordinator implements Storable<WebDocument>, Searchable<
 
 		} catch (ExportException e) {
 			e.printStackTrace();
+			System.err.println("Could not save graph data.");
 
 			return;
 		}
 
-		SaveableGraph saveableGraph = new SaveableGraph(1, serializedGraph);
+		SaveableGraph saveableGraph = new SaveableGraph(GRAPH_DB_ID, serializedGraph);
 
 		graphsDatabase.upsert(saveableGraph);
+	}
+	
+	private final void loadGraphFromDatabase() {
+		Optional<SaveableGraph> savedGraph = graphsDatabase.find(GRAPH_DB_ID);
+		
+		if (savedGraph.isEmpty()) {
+			return;
+		}
+		
+		String serializedData = savedGraph.get().getSerializedData();	
+		graphProvider.setDataUsingGraphViz(serializedData);
 	}
 	
 	// PROVIDER CONFIGURATION ===========================================================
