@@ -7,7 +7,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-@Path("sda/{id: [0-9]*}")
+@Path("sda/{id}")
 public class DocumentResource {
 	private final static String PARAM_NAME = "id";
 	
