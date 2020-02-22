@@ -10,7 +10,7 @@ import edu.uci.ics.crawler4j.robotstxt.RobotstxtConfig;
 import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
 
 final class CrawlerController {
-	private static final int NUM_CRAWLERS = 2;
+	private static final int NUM_CRAWLERS = 4;
 	private static final String STORAGE_PATH = new File(System.getProperty("user.home"), "/Desktop/crawler.nosync").toString();
 	
 	private static final DataCoordinator dataCoordinator = DataCoordinator.getInstance();

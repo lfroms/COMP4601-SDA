@@ -5,7 +5,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+
+import edu.carleton.comp4601.dao.DocumentCollection;
 
 @Path("sda/query/{terms}")
 public class QueryResource {
@@ -19,8 +20,8 @@ public class QueryResource {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
-	public Response getXML(@PathParam(PARAM_NAME) String terms) {
-		return Response.ok(SearchInterface.searchLocalXML(terms), MediaType.APPLICATION_XML).build();
+	public DocumentCollection getXML(@PathParam(PARAM_NAME) String terms) {
+		return SearchInterface.searchLocalXML(terms);
 	}
 	
 	// For client application.
