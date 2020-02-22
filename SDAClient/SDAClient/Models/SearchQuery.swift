@@ -10,18 +10,13 @@ import Foundation
 
 final class SearchQuery {
     let terms: String
-    
+
     init(terms: String) {
         self.terms = terms
     }
 
     internal func formatForLucene() -> String {
-        var splitTerms = terms.split(separator: " ")
-
-        splitTerms = splitTerms.compactMap { term in
-            "+" + term
-        }
-
-        return splitTerms.joined()
+        let splitTerms = terms.split(separator: " ")
+        return splitTerms.joined(separator: "+")
     }
 }
