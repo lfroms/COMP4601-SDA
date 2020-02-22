@@ -3,6 +3,7 @@ package edu.carleton.comp4601.store;
 import java.io.IOException;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Queue;
@@ -12,6 +13,7 @@ import org.jgrapht.io.ExportException;
 
 import edu.carleton.comp4601.dao.Document;
 import edu.carleton.comp4601.dao.DocumentCollection;
+import edu.carleton.comp4601.helpers.DocumentScoreComparator;
 import edu.carleton.comp4601.models.SaveableGraph;
 import edu.carleton.comp4601.models.WebDocument;
 import edu.carleton.comp4601.store.graph.GraphMapper;
@@ -162,13 +164,15 @@ public final class DataCoordinator implements Storable<WebDocument>, Searchable<
 		
 		// Merge documents.
 		docs.addAll(sr.getDocs());
+		
+		Collections.sort(docs, new DocumentScoreComparator());
+		
 		output.setDocuments(docs);
 		
 		return output;
 	}
 	
-	// PRIVATE HELPERS ==================================================================
-	
+	// PRIVATE HELPERS ================================================================
 	private final void saveGraphToDatabase() {
 		String serializedGraph;
 		
