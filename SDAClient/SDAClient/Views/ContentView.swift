@@ -22,6 +22,7 @@ struct ContentView: View {
                     }
                 }
             }
+            .navigationBarItems(trailing: SystemActivityIndicator(animating: $appState.loading, style: .medium))
             .navigationBarTitle(Text("SDA Search"))
         }
         .colorScheme(.light)

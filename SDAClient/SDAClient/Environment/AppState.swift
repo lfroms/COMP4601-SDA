@@ -39,6 +39,8 @@ final class AppState: ObservableObject {
         var request = URLRequest(url: url)
         request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Accept")
         
+        loading = true
+        
         session.dataTask(with: request) { data, _, _ in
             var searchResults: [SearchResult] = []
             
@@ -53,6 +55,7 @@ final class AppState: ObservableObject {
             
             DispatchQueue.main.async {
                 self.results = searchResults
+                self.loading = false
             }
             
         }.resume()

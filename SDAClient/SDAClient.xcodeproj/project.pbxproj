@@ -19,6 +19,7 @@
 		80B265BE2400AD410051AE88 /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B265BD2400AD410051AE88 /* SearchResult.swift */; };
 		80B265C02400AE970051AE88 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B265BF2400AE970051AE88 /* Constants.swift */; };
 		80B265C22400AED40051AE88 /* SearchQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B265C12400AED40051AE88 /* SearchQuery.swift */; };
+		80B265C42400BA680051AE88 /* SystemActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B265C32400BA680051AE88 /* SystemActivityIndicator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		80B265BD2400AD410051AE88 /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		80B265BF2400AE970051AE88 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		80B265C12400AED40051AE88 /* SearchQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchQuery.swift; sourceTree = "<group>"; };
+		80B265C32400BA680051AE88 /* SystemActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemActivityIndicator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 			children = (
 				80791E312400AC83006B4203 /* Search */,
 				80791E342400ACBF006B4203 /* Results */,
+				80B265C52400BA6D0051AE88 /* Indicators */,
 				806DE2FA23F33EE500CAF468 /* ContentView.swift */,
 			);
 			path = Views;
@@ -131,6 +134,14 @@
 				80B265C12400AED40051AE88 /* SearchQuery.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		80B265C52400BA6D0051AE88 /* Indicators */ = {
+			isa = PBXGroup;
+			children = (
+				80B265C32400BA680051AE88 /* SystemActivityIndicator.swift */,
+			);
+			path = Indicators;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -211,6 +222,7 @@
 				80791E332400AC8E006B4203 /* SearchBar.swift in Sources */,
 				806DE2FB23F33EE500CAF468 /* ContentView.swift in Sources */,
 				80791E2E2400ABB2006B4203 /* AppState.swift in Sources */,
+				80B265C42400BA680051AE88 /* SystemActivityIndicator.swift in Sources */,
 				80B265C02400AE970051AE88 /* Constants.swift in Sources */,
 				80B265C22400AED40051AE88 /* SearchQuery.swift in Sources */,
 			);
