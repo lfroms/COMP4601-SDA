@@ -9,6 +9,8 @@
 import Foundation
 
 struct SearchResult {
+    let uuid: UUID = UUID()
+
     let id: Int
     let name: String
     let url: URL?
