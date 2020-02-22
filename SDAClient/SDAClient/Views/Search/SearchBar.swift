@@ -15,9 +15,11 @@ struct SearchBar: View {
         TextField("Search", text: $appState.searchQuery)
             .padding(.vertical, 7)
             .padding(.horizontal, 14)
-            .background(Color.secondary.opacity(0.1))
+            .background(Color.white)
             .cornerRadius(14)
             .padding(.horizontal, 14)
+            .disableAutocorrection(true)
+            .autocapitalization(.none)
     }
 }
 
