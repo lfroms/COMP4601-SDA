@@ -73,19 +73,14 @@ public final class LuceneMapper implements DocumentMapper<WebDocument, Document>
 	public static Document createBaseDocument(WebDocument input) {
 		Document output = new Document();
 		
-		output.add(new IntPoint(IndexDocumentFields.ID, input.getId()));
-		output.add(new StoredField(IndexDocumentFields.ID, input.getId()));
-		
+		output.add(new TextField(IndexDocumentFields.ID, input.getId().toString(), Field.Store.YES));
 		output.add(new TextField(IndexDocumentFields.TITLE, input.getTitle(), Field.Store.YES));
-		
 		output.add(new TextField(IndexDocumentFields.CONTENT, input.getContent(), Field.Store.YES));
-		
-		output.add(new StringField(IndexDocumentFields.INDEXED_BY, "Lukas & Britta", Field.Store.YES));		
-		output.add(new StringField(IndexDocumentFields.URL, input.getURL().toString(), Field.Store.YES));
+		output.add(new TextField(IndexDocumentFields.INDEXED_BY, "lukas", Field.Store.YES));		
+		output.add(new TextField(IndexDocumentFields.URL, input.getURL().toString(), Field.Store.YES));
 		
 		output.add(new IntPoint(IndexDocumentFields.DATE, input.getLastCrawledTime()));
 		output.add(new StoredField(IndexDocumentFields.DATE, input.getLastCrawledTime()));
-
 		
 		return output;
 	}
