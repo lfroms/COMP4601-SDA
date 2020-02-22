@@ -82,7 +82,10 @@ final class SearchInterface {
 		JSONArray output = new JSONArray();
 		
 		ArrayList<Document> allDocuments = collection.getDocuments();
-		Collections.sort(allDocuments, new DocumentScoreComparator());
+		
+		if (allDocuments != null && allDocuments.size() > 0) {
+			Collections.sort(allDocuments, new DocumentScoreComparator());
+		}
 		
 		for (Document doc : allDocuments) {
 			output.put(convertDocumentToJSON(doc));
