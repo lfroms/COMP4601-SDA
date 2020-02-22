@@ -162,8 +162,12 @@ public final class DataCoordinator implements Storable<WebDocument>, Searchable<
 			SearchServiceManager.getInstance().reset();
 		}
 		
-		// Merge documents.
-		docs.addAll(sr.getDocs());
+		ArrayList<Document> remoteDocs = sr.getDocs();
+		
+		if (remoteDocs != null) {
+			// Merge documents.
+			docs.addAll(sr.getDocs());
+		}
 		
 		Collections.sort(docs, new DocumentScoreComparator());
 		

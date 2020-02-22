@@ -104,6 +104,7 @@ public final class LuceneProvider<DocumentType extends Identifiable> extends Map
 	@Override
 	public DocumentCollection search(String terms) {
 		DocumentCollection output = new DocumentCollection();
+		output.setDocuments(new ArrayList<edu.carleton.comp4601.dao.Document>());
 		
 		try {
 			TopDocs topDocs = searchByContent(terms, searcher);
