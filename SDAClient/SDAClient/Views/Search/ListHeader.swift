@@ -19,7 +19,7 @@ struct ListHeader: View {
         }
         .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
         .background(Color.secondary.opacity(0.1))
-        .background(Color.white)
+        .background(Color.primary.colorInvert())
     }
 }
 

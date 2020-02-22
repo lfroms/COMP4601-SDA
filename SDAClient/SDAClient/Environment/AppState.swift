@@ -6,12 +6,13 @@
 //  Copyright © 2020 Lukas Romsicki. All rights reserved.
 //
 
+import Foundation
 import SwiftUI
 
-final class AppState: ObservableObject {
+final class AppState: NSObject, ObservableObject {
     @Published var searchQuery: String = "" {
         didSet {
-            fetch()
+            debounce(#selector(fetch), after: 2)
         }
     }
     
@@ -27,7 +28,7 @@ final class AppState: ObservableObject {
     
     private let session: URLSession = URLSession(configuration: .default)
     
-    private func fetch() {
+    @objc private func fetch() {
         session.cancelAllTasks()
         
         guard !searchQuery.isEmpty else {

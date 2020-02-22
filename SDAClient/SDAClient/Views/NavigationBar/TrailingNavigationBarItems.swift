@@ -12,7 +12,7 @@ struct TrailingNavigationBarItems: View {
     @EnvironmentObject private var appState: AppState
 
     var body: some View {
-        HStack {
+        HStack(spacing: 12) {
             SystemActivityIndicator(animating: $appState.loading, style: .medium)
             SettingsSheetToggleButton()
         }

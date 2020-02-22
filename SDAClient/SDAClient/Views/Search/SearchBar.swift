@@ -15,7 +15,7 @@ struct SearchBar: View {
         TextField("Search", text: $appState.searchQuery)
             .padding(.vertical, 7)
             .padding(.horizontal, 14)
-            .background(Color.white)
+            .background(Color.primary.colorInvert())
             .cornerRadius(14)
             .padding(.horizontal, 14)
             .disableAutocorrection(true)
