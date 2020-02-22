@@ -13,7 +13,7 @@ struct SettingsSheetToggleButton: View {
 
     var body: some View {
         Button(action: handleAction) {
-            Image(systemName: "antenna.radiowaves.left.and.right")
+            Image(systemName: "gear")
         }
     }
 
