@@ -15,6 +15,9 @@ final class AppState: ObservableObject {
         }
     }
     
+    @Published var showingSettingsSheet: Bool = false
+    @Published var hostAddress: String = ""
+    
     // MARK: - API
     
     @Published var loading: Bool = false
@@ -24,23 +27,17 @@ final class AppState: ObservableObject {
     
     private let session: URLSession = URLSession(configuration: .default)
     
-    internal func fetch() {
+    private func fetch() {
+        session.cancelAllTasks()
+        
         guard !searchQuery.isEmpty else {
             results = []
             return
         }
         
-        let query = SearchQuery(terms: searchQuery)
-        
-        var url = Constants.APIService.baseURL
-        url.appendPathComponent(Constants.APIService.searchPath)
-        url.appendPathComponent(query.formatForLucene())
-        
-        var request = URLRequest(url: url)
-        request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Accept")
-        
         loading = true
         
+        let request = buildRequestFromQuery()
         session.dataTask(with: request) { data, _, _ in
             var searchResults: [SearchResult] = []
             
@@ -59,5 +56,33 @@ final class AppState: ObservableObject {
             }
             
         }.resume()
+    }
+    
+    private func buildRequestFromQuery() -> URLRequest {
+        let query = SearchQuery(terms: searchQuery)
+        
+        var url = Constants.APIService.defaultBaseUrl
+        
+        if !hostAddress.isEmpty {
+            var components = URLComponents()
+            components.scheme = "http"
+            components.host = hostAddress
+                .replacingOccurrences(of: "http://", with: "")
+                .replacingOccurrences(of: "https://", with: "")
+            
+            components.path = Constants.APIService.appPath
+            
+            if let newUrl = components.url {
+                url = newUrl
+            }
+        }
+        
+        url.appendPathComponent(Constants.APIService.searchPath)
+        url.appendPathComponent(query.formatForLucene())
+        
+        var request = URLRequest(url: url)
+        request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Accept")
+        
+        return request
     }
 }

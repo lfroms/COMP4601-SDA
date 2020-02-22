@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8000CD1F2400BC3D00D5A954 /* URLSession+CancelAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8000CD1E2400BC3D00D5A954 /* URLSession+CancelAll.swift */; };
+		8000CD212400BEFF00D5A954 /* ListHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8000CD202400BEFF00D5A954 /* ListHeader.swift */; };
+		8000CD232400C06B00D5A954 /* TrailingNavigationBarItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8000CD222400C06B00D5A954 /* TrailingNavigationBarItems.swift */; };
+		8000CD262400C0E700D5A954 /* SettingsSheetToggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8000CD252400C0E700D5A954 /* SettingsSheetToggleButton.swift */; };
+		8000CD292400C1DA00D5A954 /* SettingsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8000CD282400C1DA00D5A954 /* SettingsSheet.swift */; };
 		806DE2F723F33EE500CAF468 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806DE2F623F33EE500CAF468 /* AppDelegate.swift */; };
 		806DE2F923F33EE500CAF468 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806DE2F823F33EE500CAF468 /* SceneDelegate.swift */; };
 		806DE2FB23F33EE500CAF468 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806DE2FA23F33EE500CAF468 /* ContentView.swift */; };
@@ -23,6 +28,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8000CD1E2400BC3D00D5A954 /* URLSession+CancelAll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+CancelAll.swift"; sourceTree = "<group>"; };
+		8000CD202400BEFF00D5A954 /* ListHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListHeader.swift; sourceTree = "<group>"; };
+		8000CD222400C06B00D5A954 /* TrailingNavigationBarItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailingNavigationBarItems.swift; sourceTree = "<group>"; };
+		8000CD252400C0E700D5A954 /* SettingsSheetToggleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSheetToggleButton.swift; sourceTree = "<group>"; };
+		8000CD282400C1DA00D5A954 /* SettingsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSheet.swift; sourceTree = "<group>"; };
 		806DE2F323F33EE500CAF468 /* SDAClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SDAClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		806DE2F623F33EE500CAF468 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		806DE2F823F33EE500CAF468 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -51,6 +61,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8000CD1D2400BC2E00D5A954 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8000CD1E2400BC3D00D5A954 /* URLSession+CancelAll.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		8000CD242400C07300D5A954 /* NavigationBar */ = {
+			isa = PBXGroup;
+			children = (
+				8000CD222400C06B00D5A954 /* TrailingNavigationBarItems.swift */,
+				8000CD252400C0E700D5A954 /* SettingsSheetToggleButton.swift */,
+			);
+			path = NavigationBar;
+			sourceTree = "<group>";
+		};
+		8000CD272400C1B300D5A954 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				8000CD282400C1DA00D5A954 /* SettingsSheet.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		806DE2EA23F33EE500CAF468 = {
 			isa = PBXGroup;
 			children = (
@@ -71,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				80791E302400AC42006B4203 /* Environment */,
+				8000CD1D2400BC2E00D5A954 /* Extensions */,
 				80791E2F2400AC32006B4203 /* Views */,
 				80B265BC2400AD2F0051AE88 /* Models */,
 				806DE2F623F33EE500CAF468 /* AppDelegate.swift */,
@@ -94,6 +130,8 @@
 		80791E2F2400AC32006B4203 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8000CD272400C1B300D5A954 /* Settings */,
+				8000CD242400C07300D5A954 /* NavigationBar */,
 				80791E312400AC83006B4203 /* Search */,
 				80791E342400ACBF006B4203 /* Results */,
 				80B265C52400BA6D0051AE88 /* Indicators */,
@@ -115,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				80791E322400AC8E006B4203 /* SearchBar.swift */,
+				8000CD202400BEFF00D5A954 /* ListHeader.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -218,8 +257,13 @@
 				806DE2F723F33EE500CAF468 /* AppDelegate.swift in Sources */,
 				80B265BE2400AD410051AE88 /* SearchResult.swift in Sources */,
 				80791E362400ACD2006B4203 /* SearchResultListItem.swift in Sources */,
+				8000CD232400C06B00D5A954 /* TrailingNavigationBarItems.swift in Sources */,
 				806DE2F923F33EE500CAF468 /* SceneDelegate.swift in Sources */,
+				8000CD212400BEFF00D5A954 /* ListHeader.swift in Sources */,
+				8000CD262400C0E700D5A954 /* SettingsSheetToggleButton.swift in Sources */,
+				8000CD1F2400BC3D00D5A954 /* URLSession+CancelAll.swift in Sources */,
 				80791E332400AC8E006B4203 /* SearchBar.swift in Sources */,
+				8000CD292400C1DA00D5A954 /* SettingsSheet.swift in Sources */,
 				806DE2FB23F33EE500CAF468 /* ContentView.swift in Sources */,
 				80791E2E2400ABB2006B4203 /* AppState.swift in Sources */,
 				80B265C42400BA680051AE88 /* SystemActivityIndicator.swift in Sources */,

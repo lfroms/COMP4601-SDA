@@ -12,7 +12,16 @@ struct SearchResultListItem: View {
     let searchResult: SearchResult
 
     var body: some View {
-        Text(searchResult.name)
+        HStack {
+            Text(searchResult.name)
+            Spacer()
+            Text(scoreText)
+                .foregroundColor(.secondary)
+        }
+    }
+    
+    private var scoreText: String {
+        String(searchResult.score)
     }
 }
 

@@ -13,19 +13,20 @@ struct ContentView: View {
 
     var body: some View {
         NavigationView {
-            VStack(spacing: 0) {
-                SearchBar()
-
-                List {
+            List {
+                Section(header: ListHeader()) {
                     ForEach(appState.results, id: \.id) { result in
                         SearchResultListItem(searchResult: result)
                     }
                 }
             }
-            .navigationBarItems(trailing: SystemActivityIndicator(animating: $appState.loading, style: .medium))
+            .navigationBarItems(trailing: TrailingNavigationBarItems())
             .navigationBarTitle(Text("SDA Search"))
         }
-        .colorScheme(.light)
+        .sheet(isPresented: $appState.showingSettingsSheet) {
+            SettingsSheet()
+                .environmentObject(self.appState)
+        }
     }
 }
 

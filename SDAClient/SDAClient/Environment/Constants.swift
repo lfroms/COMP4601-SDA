@@ -10,7 +10,8 @@ import Foundation
 
 final class Constants {
     final class APIService {
-        static let baseURL: URL = URL(string: "http://localhost:8080/COMP4601-SDA/rest/sda")!
+        static let defaultBaseUrl: URL = URL(string: "http://localhost:8080" + appPath)!
+        static let appPath: String = "/COMP4601-SDA/rest/sda"
         static let searchPath: String = "/search"
     }
 }
