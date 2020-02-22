@@ -12,6 +12,8 @@
 		8000CD232400C06B00D5A954 /* TrailingNavigationBarItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8000CD222400C06B00D5A954 /* TrailingNavigationBarItems.swift */; };
 		8000CD262400C0E700D5A954 /* SettingsSheetToggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8000CD252400C0E700D5A954 /* SettingsSheetToggleButton.swift */; };
 		8000CD292400C1DA00D5A954 /* SettingsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8000CD282400C1DA00D5A954 /* SettingsSheet.swift */; };
+		8000CD2B2400C83600D5A954 /* SearchResultDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8000CD2A2400C83600D5A954 /* SearchResultDetail.swift */; };
+		8000CD2D2400C91700D5A954 /* SearchResultDetailItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8000CD2C2400C91700D5A954 /* SearchResultDetailItem.swift */; };
 		806DE2F723F33EE500CAF468 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806DE2F623F33EE500CAF468 /* AppDelegate.swift */; };
 		806DE2F923F33EE500CAF468 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806DE2F823F33EE500CAF468 /* SceneDelegate.swift */; };
 		806DE2FB23F33EE500CAF468 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806DE2FA23F33EE500CAF468 /* ContentView.swift */; };
@@ -33,6 +35,8 @@
 		8000CD222400C06B00D5A954 /* TrailingNavigationBarItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailingNavigationBarItems.swift; sourceTree = "<group>"; };
 		8000CD252400C0E700D5A954 /* SettingsSheetToggleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSheetToggleButton.swift; sourceTree = "<group>"; };
 		8000CD282400C1DA00D5A954 /* SettingsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSheet.swift; sourceTree = "<group>"; };
+		8000CD2A2400C83600D5A954 /* SearchResultDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultDetail.swift; sourceTree = "<group>"; };
+		8000CD2C2400C91700D5A954 /* SearchResultDetailItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultDetailItem.swift; sourceTree = "<group>"; };
 		806DE2F323F33EE500CAF468 /* SDAClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SDAClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		806DE2F623F33EE500CAF468 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		806DE2F823F33EE500CAF468 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -161,6 +165,8 @@
 		80791E342400ACBF006B4203 /* Results */ = {
 			isa = PBXGroup;
 			children = (
+				8000CD2A2400C83600D5A954 /* SearchResultDetail.swift */,
+				8000CD2C2400C91700D5A954 /* SearchResultDetailItem.swift */,
 				80791E352400ACD2006B4203 /* SearchResultListItem.swift */,
 			);
 			path = Results;
@@ -259,12 +265,14 @@
 				80791E362400ACD2006B4203 /* SearchResultListItem.swift in Sources */,
 				8000CD232400C06B00D5A954 /* TrailingNavigationBarItems.swift in Sources */,
 				806DE2F923F33EE500CAF468 /* SceneDelegate.swift in Sources */,
+				8000CD2D2400C91700D5A954 /* SearchResultDetailItem.swift in Sources */,
 				8000CD212400BEFF00D5A954 /* ListHeader.swift in Sources */,
 				8000CD262400C0E700D5A954 /* SettingsSheetToggleButton.swift in Sources */,
 				8000CD1F2400BC3D00D5A954 /* URLSession+CancelAll.swift in Sources */,
 				80791E332400AC8E006B4203 /* SearchBar.swift in Sources */,
 				8000CD292400C1DA00D5A954 /* SettingsSheet.swift in Sources */,
 				806DE2FB23F33EE500CAF468 /* ContentView.swift in Sources */,
+				8000CD2B2400C83600D5A954 /* SearchResultDetail.swift in Sources */,
 				80791E2E2400ABB2006B4203 /* AppState.swift in Sources */,
 				80B265C42400BA680051AE88 /* SystemActivityIndicator.swift in Sources */,
 				80B265C02400AE970051AE88 /* Constants.swift in Sources */,

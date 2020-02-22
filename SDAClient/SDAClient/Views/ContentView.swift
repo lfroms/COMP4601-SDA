@@ -16,7 +16,9 @@ struct ContentView: View {
             List {
                 Section(header: ListHeader()) {
                     ForEach(appState.results, id: \.id) { result in
-                        SearchResultListItem(searchResult: result)
+                        NavigationLink(destination: SearchResultDetail(searchResult: result)) {
+                            SearchResultListItem(searchResult: result)
+                        }
                     }
                 }
             }
