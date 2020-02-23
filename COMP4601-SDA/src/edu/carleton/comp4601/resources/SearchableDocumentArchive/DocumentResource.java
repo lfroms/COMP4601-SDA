@@ -6,6 +6,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 @Path("sda/{id : \\d+}")
 public class DocumentResource {
@@ -30,8 +31,12 @@ public class DocumentResource {
 	}
 	
 	@DELETE
-	public void delete(@PathParam(PARAM_NAME) String id) {
-		DocumentInterface.delete(mapId(id));
+	public Response delete(@PathParam(PARAM_NAME) String id) {		
+		if (DocumentInterface.delete(mapId(id))) {
+			return Response.ok().build();
+		} else {
+			return Response.status(404).build();
+		}
 	}
 	
 	// PRIVATE HELPERS ==================================================================

@@ -73,8 +73,15 @@ final class DocumentInterface {
 		return HTMLFrameGenerator.wrapInHTMLFrame(unwrappedDocument.getTitle(), output);		
 	}
 
-	public static void delete(Integer id) {
+	public static Boolean delete(Integer id) {
+		Optional<WebDocument> docToDelete = coordinator.find(id);
+		
+		if (docToDelete.isEmpty()) {
+			return false;
+		}
+		
 		coordinator.delete(id);
+		return true;
 	}
 
 	public static String getSingleXML(Integer id) {
