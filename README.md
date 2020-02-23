@@ -41,3 +41,6 @@ If you are running on a physical device, you may want to change the address of t
 1. Click the "gear" icon at the top.
 2. Enter the host (and port) of the server in the presented sheet.
 3. Close the sheet and perform a search as per normal.
+
+## Extra implementations
+* Dark mode is supported.
