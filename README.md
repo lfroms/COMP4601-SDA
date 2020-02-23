@@ -7,7 +7,7 @@ The database, graph, and Lucene index must be loaded with data first for the app
 1. Start a MongoDB server at `localhost` with port `27017`.
 2. Open the project in Eclipse.
 3. Right-click on the project root, then click `Gradle > Refresh Gradle Project`.  You must have a working internet connection for this to work.
-  * This step will download all the necessary dependencies to your machine.
+    * This step will download all the necessary dependencies to your machine.
 4. Go to `Project > Clean` to clean the project of any possible artifacts.
 
 ## Performing a crawl
