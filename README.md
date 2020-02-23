@@ -2,6 +2,10 @@
 * Lukas Romsicki (101059080)
 * Britta Evans-Fenton (101017131)
 
+## Prerequisites
+* Java 13
+* MongoDB 4.2.2
+
 ## Preliminary
 The database, graph, and Lucene index must be loaded with data first for the app to function correctly.
 1. Start a MongoDB server at `localhost` with port `27017`.
