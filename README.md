@@ -1,6 +1,6 @@
 # Searchable Document Archive
 * Lukas Romsicki (101059080)
-* Britta Evans-Fenton
+* Britta Evans-Fenton (101017131)
 
 ## Preliminary
 The database, graph, and Lucene index must be loaded with data first for the app to function correctly.
