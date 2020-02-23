@@ -22,12 +22,14 @@ a) Deploy the _war_ file, or;
 b) Launch the server through Eclipse.
 
 Through Eclipse:
+
 _Assuming you still have the Eclipse project open as per the **Preliminary** section._
 1. Open a server resource file, for example, `MainResource.java`.
 2. Click the green "play" button in the Eclipse toolbar.
 3. Wait for the server to launch.
 
 ## Starting the client
+
 _Note: You must have a Mac with the latest version of Xcode for this to work._
 1. Open the Xcode project from `SDAClient`.
 2. Select a target (either Simulator or physical device).
@@ -36,6 +38,6 @@ _Note: You must have a Mac with the latest version of Xcode for this to work._
 You can then use the search bar to search.  A debounce of 2 seconds has been implemented.  That is, the client waits 2 seconds after the user has finished typing before submitting the request to the server, allowing for the UI to not be locked.
 
 If you are running on a physical device, you may want to change the address of the server.  To do this:
-1. Click the "gear" icon at the top/
+1. Click the "gear" icon at the top.
 2. Enter the host (and port) of the server in the presented sheet.
 3. Close the sheet and perform a search as per normal.
