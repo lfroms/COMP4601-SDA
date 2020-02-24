@@ -11,8 +11,6 @@ import edu.carleton.comp4601.models.Identifiable;
 
 final class PageRanker {
 	public static <DocumentType extends Identifiable> Map<Integer, Double> computeRanks(Graph<DocumentType, DefaultEdge> graph) {
-		
-		// TODO: Configure PageRank
 		PageRank<DocumentType, DefaultEdge> pageRank = 
 				new PageRank<>(
 						graph,
