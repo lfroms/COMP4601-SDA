@@ -95,6 +95,7 @@ public final class LuceneProvider<DocumentType extends Identifiable> extends Map
 	public void delete(Integer id) {
 		try {
 			writer.deleteDocuments(new Term(IndexDocumentFields.ID, String.valueOf(id)));
+			writer.commit();
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.err.println("Could not delete Lucene document with id " + id + ". Skipping...");

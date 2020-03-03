@@ -2,6 +2,7 @@ package edu.carleton.comp4601.resources.SearchableDocumentArchive;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -68,5 +69,15 @@ public class MainResource {
 		MainInterface.reIndexRemovingBoost();
 		
 		return Response.ok().build();
+	}
+	
+	@GET
+	@Path("delete/{query}")
+	public Response deleteByQuery(@PathParam("query") String query) {
+		if (DocumentsInterface.deleteByQuery(query)) {
+			return Response.ok().build();
+		}
+		
+		return Response.noContent().build();
 	}
 }
